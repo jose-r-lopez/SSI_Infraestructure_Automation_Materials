@@ -32,7 +32,7 @@ We did not use the *Alpine* base image because our students work with *Ubuntu* a
 
 Please, do take this warning very seriously, these are **NOT** production-ready images, just convenient teaching materials useful for acquiring experience with several tools. 
 
-To use all this you need to install Docker in an OS. The VM build with the previous Vagrantfile installs it precisely with this in mind ;) ;) ;) (yeah, we build labs with different intercommunicated containers inside that VM saving TONS of resources if compared with a "tradition" all-VM approach, and we think it is beatiful! :D). Once this is clarified, let's describe the contents: 
+To use all this you need to install Docker in an OS. The VM build with the previous Vagrantfile installs it precisely with this in mind ;) ;) ;) (yeah, we build labs with different intercommunicated containers inside that VM saving TONS of resources if compared with a "traditional" all-VM approach, and we think it is beatiful! :D). Once this is clarified, let's describe the contents: 
 
 * *build.sh*: Our "workhorse" script to build any image we need. We just need to use the -d parameter to pass a path that should have the following contents (Ex. *./build.sh -d ./ubuntus/ubuntu_base/*):
   * A *Dockerfile* with the instructions of the image to build
@@ -56,3 +56,5 @@ Once described the utility scripts, let's enumerate the *Docker* images we have 
 * *kalis/kali_base*: A *Kali Linux* image with the same interactive capabilities of the equivalent Ubuntu one and also adding nmap. This is also the base of all the following *Kali* images, so **you must ensure that this image is built first before using any of the others!** 
 * *kalis/kali_crypto*: Adds to the base *Kali* several tools to perform several password brute-forcing, dictionary generation and metadata extraction operations. It also incoporates commented instructions to add and uncompress the rockyou.txt password dictionary (that you will have to download) and to copy sample passwd and shadow files to test brute-forcing operations (that you will have to provide). Please build the *kalis/kalil_base* first!
 * *kalis/kali_exploiting*: Adds to the base *Kali* several tools to perform several exploiting operations, including a *Metasploit Framework* installation. Please build the *kalis/kalil_base* first!. **NOTE: This image is actually quite large! (1.4Gb approximately)**. 
+
+I hope you enjoy experimenting with these materials! 
