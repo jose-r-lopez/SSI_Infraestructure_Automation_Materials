@@ -11,7 +11,7 @@ The goal of these files is to create a folder, download them to it, install *Vag
 A full *Ubuntu 18.04* machine VM, 2 cores, 2Gb of RAM and 80Gb of dynamic hard disk. It has been prepared for *VirtualBox*, *Hyper-V* and *VMWare Desktop* (this last one could not be tested). It also includes:
   * Various optimizations for each virtualilzation platform (**NOTE**: in the *VirtualBox* part, one of these optimization might not be implemented in some MAC OS versions, if an error occurs when building the VM, just comment the offending feature line in the file).
   * A custom shared folder (change it at will)
-  * Some fancy configuration for the *nano* editor and the TMUX multi-terminal software, including mouse integration, to facilitate editing files (remember that this is a VM for teaching! :)).
+  * Some fancy configuration for the *nano* editor and the TMUX multi-terminal software, including mouse integration, to facilitate editing files (remember that this is a VM for teaching! :)) and the *Midnight Commander* text-based file browser.
   * A custom provision bash script installing: full updates, the XFC4 GUI (yes, I know, but, again, this is a teaching VM ;)), some common tools for our course, a sudoer user (*ssiuser*) with a known password (please change it!), *Docker* and *Docker Compose*. It also changes they keyboard layout to Spanish (we are a Spanish University! :D). **PLEASE DO REVIEW THIS FILE BEFORE INSTALLING ANYTHING**, to adapt their contents to your needs. 
   * Some trivial scripts to do common operations without requiring *Vagrant* knowledge: *build* (run first), *run* (run second), *update* (re-provision the VM) and *destroy* (so you have to rebuild it after) the created VM. 
 
@@ -46,10 +46,13 @@ Once described the utility scripts, let's enumerate the *Docker* images we have 
 
 ### Ubuntus ###
 
-* *ubuntus/ubuntu_base*: An *Ubuntu 18.04* image with some common commands to test. This is also the base of all the following Ubuntu images, so **you must ensure that this image is built first before using any of the others!**
+* *ubuntus/ubuntu_base*: An *Ubuntu 18.04* image with some common commands to test. This is also the base of all the following *Ubuntu* images, so **you must ensure that this image is built first before using any of the others!**
 * *ubuntus/ubuntu_apache*: Uses the previous image and adds the Apache Web Server. Please build the *ubuntus/ubuntu_base* first!
-* * *ubuntus/ubuntu_ssh*: Uses the *ubuntus/ubuntu_base* image and adds a SSH server, a user and a trivial password (**NOT SECURE!**). Please build the *ubuntus/ubuntu_base* first!
-* * *ubuntus/ubuntu_apache_ssh*: Uses the *ubuntus/ubuntu_apache* image and adds a SSH server, a user and a trivial password (**NOT SECURE!**). Please build the *ubuntus/ubuntu_apache* first!. We also provide a sample script on how you could map any web page you have in the host to be served by this container. 
+* *ubuntus/ubuntu_ssh*: Uses the *ubuntus/ubuntu_base* image and adds a SSH server, a user and a trivial password (**NOT SECURE!**). Please build the *ubuntus/ubuntu_base* first!
+* *ubuntus/ubuntu_apache_ssh*: Uses the *ubuntus/ubuntu_apache* image and adds a SSH server, a user and a trivial password (**NOT SECURE!**). Please build the *ubuntus/ubuntu_apache* first!. We also provide a sample script on how you could map any web page you have in the host to be served by this container. 
 
 ### Kalis ###
-* kalis/kali_base: 
+
+* *kalis/kali_base*: A *Kali Linux* image with the same interactive capabilities of the equivalent Ubuntu one and also adding nmap. This is also the base of all the following *Kali* images, so **you must ensure that this image is built first before using any of the others!** 
+* *kalis/kali_crypto*: Adds to the base *Kali* several tools to perform several password brute-forcing, dictionary generation and metadata extraction operations. It also incoporates commented instructions to add and uncompress the rockyou.txt password dictionary (that you will have to download) and to copy sample passwd and shadow files to test brute-forcing operations (that you will have to provide). Please build the *kalis/kalil_base* first!
+* *kalis/kali_exploiting*: Adds to the base *Kali* several tools to perform several exploiting operations, including a *Metasploit Framework* installation. Please build the *kalis/kalil_base* first!. **NOTE: This image is actually quite large! (1.4Gb approximately)**. 
