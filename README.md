@@ -34,10 +34,10 @@ Please, do take this warning very seriously, these are **NOT** production-ready 
 
 To use all this you need to install Docker in an OS. The VM build with the previous Vagrantfile installs it precisely with this in mind ;) ;) ;) (yeah, we build labs with different intercommunicated containers inside that VM saving TONS of resources if compared with a "tradition" all-VM approach, and we think it is beatiful! :D). Once this is clarified, let's describe the contents: 
 
-* *build.sh*: Our "workhorse" script to build any image we need. We just need to use the -d parameter to pass a path that should have the following contents (Ex. ./build.sh -d ./ubuntus/ubuntu_base/):
- * A *Dockerfile* with the instructions of the image to build
- * A *img_name.txt* file with the name of the image to be built
- * Any other necessary file used in the Dockerfile
+* *build.sh*: Our "workhorse" script to build any image we need. We just need to use the -d parameter to pass a path that should have the following contents (Ex. *./build.sh -d ./ubuntus/ubuntu_base/*):
+  * A *Dockerfile* with the instructions of the image to build
+  * A *img_name.txt* file with the name of the image to be built
+  * Any other necessary file used in the Dockerfile
 * *start_cmd.sh*: After building an image, this used the same approach with the -d parameter to run a container of the image built with the contents of the specified path (./start_cmd.sh -d ./ubuntus/ubuntu_base/).
 * *start_cmd_writable_dir.sh*: Same as previous, but allow to specify a host and a guest path that can be used to easily share files between the host and the containers. Two extra parameters allows to map any path, but if not provided a default one is used (./start_cmd_writable_dir.sh -d ./ubuntus/ubuntu_base/).
 * *start_detached.sh*: Same as *start_cmd.sh*, but no bash shell is created. This is meant to run containers that keep a foreground service running. If not, the container will be terminated inmediately!
