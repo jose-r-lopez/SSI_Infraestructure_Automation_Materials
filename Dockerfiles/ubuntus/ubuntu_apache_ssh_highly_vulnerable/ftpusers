@@ -1,0 +1,13 @@
+# /etc/ftpusers: list of users disallowed FTP access. See ftpusers(5).
+
+daemon
+bin
+sys
+sync
+games
+man
+lp
+mail
+news
+uucp
+nobody

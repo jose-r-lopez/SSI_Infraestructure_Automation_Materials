@@ -1,0 +1,1 @@
+sudo docker run -d ssi/ubuntu_apache_ssh_highly_vulnerable
