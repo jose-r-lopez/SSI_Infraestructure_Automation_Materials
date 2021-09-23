@@ -4,7 +4,7 @@ In the course *Seguridad de Sistemas Informáticos* (SSI, Computer Systems Secur
 
 ## Vagrantfiles ##
 
-The goal of these files is to create a folder, download them to it, install *Vagrant* (https://www.vagrantup.com/) in your OS (it is multiplatform!) and review and/or modify the files to build a VM automatically adapted to your needs.
+The goal of these files is to create a folder, download them to it, install *Vagrant* (https://www.vagrantup.com/) in your OS (it is multiplatform!), and review and/or modify the files to build a VM automatically adapted to your needs.
 
 ### Ubuntu_full ###
 
@@ -12,7 +12,7 @@ A full *Ubuntu 18.04* machine VM, 2 cores, 2Gb of RAM and 80Gb of dynamic hard d
   * Various optimizations for each virtualilzation platform (**NOTE**: in the *VirtualBox* part, one of these optimization might not be implemented in some MAC OS versions, if an error occurs when building the VM, just comment the offending feature line in the file).
   * A custom shared folder (change it at will)
   * Some fancy configuration for the *nano* editor and the TMUX multi-terminal software, including mouse integration, to facilitate editing files (remember that this is a VM for teaching! :)) and the *Midnight Commander* text-based file browser.
-  * A custom provision bash script installing: full updates, the XFC4 GUI (yes, I know, but, again, this is a teaching VM ;)), some common tools for our course, a sudoer user (*ssiuser*) with a known password (please change it!), *Docker* and *Docker Compose*. It also changes they keyboard layout to Spanish (we are a Spanish University! :D). **PLEASE DO REVIEW THIS FILE BEFORE INSTALLING ANYTHING**, to adapt their contents to your needs. 
+  * A custom provision bash script installing: full updates, the XFC4 GUI (yes, I know, but, again, this is a teaching VM ;)), some common tools for our course, a *sudoer* user (*ssiuser*) with a known password (please change it!), *Docker* and *Docker Compose*. It also changes they keyboard layout to Spanish (we are a Spanish University! :D). **PLEASE DO REVIEW THIS FILE BEFORE INSTALLING ANYTHING**, to adapt their contents to your needs. 
   * Some trivial scripts to do common operations without requiring *Vagrant* knowledge: *build* (run first), *run* (run second), *update* (re-provision the VM) and *destroy* (so you have to rebuild it after) the created VM. 
 
 This VM has been used and tested without problems from over 100 people. It also relies on official repos of all software installed. Hope you find it useful!
@@ -21,18 +21,18 @@ This VM has been used and tested without problems from over 100 people. It also 
 
 These are a collection of *Dockerfiles* that build *Ubuntu* and *Kali* images suited for specific purposes, such as testing general OS commands, web server, SSH server, etc., all fulfilling a requirement of the different topics of our course. We also supply some utility scripts for your convenience. All *Dockerfiles* use official product repos to build the images, and are configured to minimize the space taken by each image and speed up its build process. 
 
-These images are meant to mimic the behavior of a typical bash command line in a Linux VM because this is the most convenient way of using them in our course. This means that we installed extra stuff to facilitate this, such as the nano editor, TMUX multi-terminal software, and other utilities. You should not install all this stuff if you are using these containers to deploy a product, saving even more space.
+These images are meant to mimic the behavior of a typical bash command line in a Linux VM because this is the most convenient way of using them in our course. This means that we installed extra stuff to facilitate this, such as the nano editor, TMUX multi-terminal software, the *Midnight Commander* text-based file browser, and other utilities. You should not install all this stuff if you are using these containers to deploy a product, saving even more space.
 
 We did not use the *Alpine* base image because our students work with *Ubuntu* all the year, and we want to keep this base OS at all times to avoid problems. However, if you give a try to *Alpine* in the FROM clause of the *Dockerfiles* and this image has everything you need, the image size will greatly decrease.
 
-**IMPORTANT NOTICE: These images are created exclusively for teaching, thus we did not take image hardening into consideration. Images are run as root and no explicit security measure was taken into consideration to build them. Thus, if you decide to use this for actual product deployment, you should follow tried and tested Docker hardening procedures like the ones I describe here:**
+**IMPORTANT NOTICE: These images are created exclusively for teaching, thus we did not take image hardening into consideration. Images are run as *root* and no explicit security measure was taken into consideration to build them. Thus, if you decide to use this for actual product deployment, you should follow tried and tested Docker hardening procedures like the ones I describe here:**
 
 * https://www.researchgate.net/publication/352106084_Docker_Strong_Foundations_for_Verifiable_Secure_Deployments
 * https://www.youtube.com/watch?v=Kx2lxnHRhRs&t=1542s
 
 Please, do take this warning very seriously, these are **NOT** production-ready images, just convenient teaching materials useful for acquiring experience with several tools. 
 
-To use all this you need to install Docker in an OS. The VM build with the previous Vagrantfile installs it precisely with this in mind ;) ;) ;) (yeah, we build labs with different intercommunicated containers inside that VM saving TONS of resources if compared with a "traditional" all-VM approach, and we think it is beatiful! :D). Once this is clarified, let's describe the contents: 
+To use all this you need to install *Docker* (https://www.docker.com/) in a machine or VM. The VM built with the previous *Vagrantfile* installs it precisely with this in mind ;) ;) ;) (yeah, we build labs with different intercommunicated containers inside that VM, saving TONS of resources if compared with a "traditional" all-VM approach, and we think it is beatiful! :D). Once this is clarified, let's describe the contents: 
 
 * *build.sh*: Our "workhorse" script to build any image we need. We just need to use the -d parameter to pass a path that should have the following contents (Ex. *./build.sh -d ./ubuntus/ubuntu_base/*):
   * A *Dockerfile* with the instructions of the image to build
@@ -50,11 +50,21 @@ Once described the utility scripts, let's enumerate the *Docker* images we have 
 * *ubuntus/ubuntu_apache*: Uses the previous image and adds the Apache Web Server. Please build the *ubuntus/ubuntu_base* first!
 * *ubuntus/ubuntu_ssh*: Uses the *ubuntus/ubuntu_base* image and adds a SSH server, a user and a trivial password (**NOT SECURE!**). Please build the *ubuntus/ubuntu_base* first!
 * *ubuntus/ubuntu_apache_ssh*: Uses the *ubuntus/ubuntu_apache* image and adds a SSH server, a user and a trivial password (**NOT SECURE!**). Please build the *ubuntus/ubuntu_apache* first!. We also provide a sample script on how you could map any web page you have in the host to be served by this container. 
-
+* *ubuntus/ubuntu_apache_ssh_highly_vulnerable*: Uses the *ubuntus/ubuntu_apache_ssh* image and adds a FTP and a telnet server and a *sudoer* user and a trivial password (**NOT SECURE!**). Please build the *ubuntus/ubuntu_apache_ssh* first!.
+* 
 ### Kalis ###
 
 * *kalis/kali_base*: A *Kali Linux* image with the same interactive capabilities of the equivalent Ubuntu one and also adding nmap. This is also the base of all the following *Kali* images, so **you must ensure that this image is built first before using any of the others!** 
 * *kalis/kali_crypto*: Adds to the base *Kali* several tools to perform several password brute-forcing, dictionary generation and metadata extraction operations. It also incoporates commented instructions to add and uncompress the rockyou.txt password dictionary (that you will have to download) and to copy sample passwd and shadow files to test brute-forcing operations (that you will have to provide). Please build the *kalis/kalil_base* first!
 * *kalis/kali_exploiting*: Adds to the base *Kali* several tools to perform several exploiting operations, including a *Metasploit Framework* installation. Please build the *kalis/kalil_base* first!. **NOTE: This image is actually quite large! (1.4Gb approximately)**. 
+
+## Labs ##
+
+While the VM is our "test field" and the *Docker* images are our "test subjets", we coordinate *Docker* containers inside the VM thanks to *Docker Compose* (https://docs.docker.com/compose/) files, that run and communicate containers of different images to run the labs we want for each laboratory. To show how we do that, we have provided a *sample_lab* laboratory that communicates a *kali_base* container called *kali_attack* with a *ubuntu_apache_ssh_highly_vulnerable* container called *ubuntu_victim* for testing *nmap*. Once you install *Docker Compose*, labs are automated with the following scripts:
+
+* *prepare_lab.sh*: Run this script first to create all the Docker images involved in this lab. Place the Labs directory in the same directory as the Dockerfiles directory, and this wll ensure that all the images will be built automatically without having to worry about the dependencies between them.
+* *build_lab.sh*: Runs this lab. Please do not kill the process on the terminal you run this script, or the lab will be destroyed. To continue working, just spawn another terminal.
+* *enter_X.sh*: Login on each container of the infrastructure
+
 
 I hope you enjoy experimenting with these materials! 
