@@ -1,0 +1,16 @@
+version: "2"
+services:
+    ubuntu_victim:
+        image: ssi/ubuntu_apache_ssh_highly_vulnerable
+        container_name: ubuntu_victim
+        restart: on-failure
+        volumes:
+            - ./volume_data/ubuntu:/home/ssiuser/shared
+    kali_attack:
+        image: ssi/kali_base
+        container_name: kali_attack
+        restart: on-failure
+        stdin_open: true # docker run -i
+        tty: true        # docker run -t
+        volumes:
+            - ./volume_data/kali:/root/shared
