@@ -51,7 +51,8 @@ Once described the utility scripts, let's enumerate the *Docker* images we have 
 * *ubuntus/ubuntu_ssh*: Uses the *ubuntus/ubuntu_base* image and adds a SSH server, a user and a trivial password (**NOT SECURE!**). Please build the *ubuntus/ubuntu_base* first!
 * *ubuntus/ubuntu_apache_ssh*: Uses the *ubuntus/ubuntu_apache* image and adds a SSH server, a user and a trivial password (**NOT SECURE!**). Please build the *ubuntus/ubuntu_apache* first!. We also provide a sample script on how you could map any web page you have in the host to be served by this container. 
 * *ubuntus/ubuntu_apache_ssh_highly_vulnerable*: Uses the *ubuntus/ubuntu_apache_ssh* image and adds a FTP and a telnet server and a *sudoer* user and a trivial password (**NOT SECURE!**). Please build the *ubuntus/ubuntu_apache_ssh* first!.
-* 
+* *ubuntus/ubuntu_apache_proxy*: Just uses *ssi/ubuntu_apache_ssh* to enable reverse proxy functionality, installing no additional packages. The initialization script expects to find an *apache2.conf* file to copy to */etc/apache2/* in the */cluster_conf* directory. This way, it is easy using *Docker Compose* to map a custom *apache2.conf* file to this folder and use it to configure different labs with the same infrastructure (see *proxy_lab* for details!).
+
 ### Kalis ###
 
 * *kalis/kali_base*: A *Kali Linux* image with the same interactive capabilities of the equivalent Ubuntu one and also adding nmap. This is also the base of all the following *Kali* images, so **you must ensure that this image is built first before using any of the others!** 
@@ -60,11 +61,15 @@ Once described the utility scripts, let's enumerate the *Docker* images we have 
 
 ## Labs ##
 
-While the VM is our "test field" and the *Docker* images are our "test subjets", we coordinate *Docker* containers inside the VM thanks to *Docker Compose* (https://docs.docker.com/compose/) files, that run and communicate containers of different images to run the labs we want for each laboratory. To show how we do that, we have provided a *sample_lab* laboratory that communicates a *kali_base* container called *kali_attack* with a *ubuntu_apache_ssh_highly_vulnerable* container called *ubuntu_victim* for testing *nmap*. Once you install *Docker Compose*, labs are automated with the following scripts:
+While the VM is our "test field" and the *Docker* images are our "test subjets", we coordinate *Docker* containers inside the VM thanks to *Docker Compose* (https://docs.docker.com/compose/) files, that run and communicate containers of different images to run the labs we want for each laboratory. To show how we do that, we have provided some labs. Once you install *Docker Compose*, all labs are automated with the following scripts:
 
 * *prepare_lab.sh*: Run this script first to create all the Docker images involved in this lab. Place the Labs directory in the same directory as the Dockerfiles directory, and this wll ensure that all the images will be built automatically without having to worry about the dependencies between them.
 * *build_lab.sh*: Runs this lab. Please do not kill the process on the terminal you run this script, or the lab will be destroyed. To continue working, just spawn another terminal.
 * *enter_X.sh*: Login on each container of the infrastructure
 
+The provided labs are:
 
+* *sample_lab*: laboratory that communicates a *kali_base* container called *kali_attack* with a *ubuntu_apache_ssh_highly_vulnerable* container called *ubuntu_victim* for testing *nmap*
+* *proxy_lab*: laboratory that communicates a Kali container (*labproxy_kali*) with an Ubuntu reverse proxy (*reverse_proxy*) with a custom 198.62.0.0/16 network (*front_net*). Additionally, the reverse proxy communicates with a web server via another different custom 172.106.0.0/16 network (*back_net*). Performing a *curl* from the Kali to the IP 172.62.0.3 (reverse proxy static IP) returns the web page on the web server, served from 172.106.0.3 (web server static IP). Note that the *Kali* is unable to reach the web server IP, and the reverse proxy is the only "gate" to access the web. This schema can be enhanced to create your own reverse proxy "hide all the workings of my network" fun! :D
+ 
 I hope you enjoy experimenting with these materials! 
