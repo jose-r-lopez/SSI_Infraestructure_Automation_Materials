@@ -1,0 +1,47 @@
+version: "2"
+services:
+    webproxy:
+        image: ssi/ubuntu_apache_ssh
+        container_name: webproxy
+        restart: on-failure
+# You can place your websites in the container like this
+#        volumes:
+#            - ../../images/ubuntus/webs/web_eii:/var/www/html
+        networks:
+            back_net:
+                ipv4_address: 172.106.0.3
+    reverse_proxy:
+        image: ssi/ubuntu_apache_proxy
+        container_name: reverse_proxy
+        restart: on-failure
+        volumes:
+            - ./apache_conf:/cluster_conf
+        networks:
+            back_net:
+                ipv4_address: 172.106.0.2
+            front_net:
+                ipv4_address: 198.62.0.3
+    labproxy_kali:
+        image: ssi/kali_base
+        container_name: labproxy_kali
+        restart: on-failure
+        stdin_open: true # docker run -i
+        tty: true        # docker run -t
+        volumes:
+            - ./volume_data/kali:/root/shared
+        networks:
+            default:
+            front_net:
+                ipv4_address: 198.62.0.2
+
+networks:
+    back_net:
+        driver: bridge
+        ipam:
+            config:
+                - subnet: 172.106.0.0/16
+    front_net:
+        driver: bridge
+        ipam:
+            config:
+                - subnet: 198.62.0.0/16
