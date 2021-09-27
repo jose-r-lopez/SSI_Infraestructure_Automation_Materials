@@ -4,7 +4,7 @@ In the course *Seguridad de Sistemas Informáticos* (SSI, Computer Systems Secur
 
 ## Vagrantfiles ##
 
-The goal of these files is to create a folder, download them to it, install *Vagrant* (https://www.vagrantup.com/) in your OS (it is multiplatform!), and review and/or modify the files to build a VM automatically adapted to your needs.
+The goal of these files is to create a folder, download them to it, install *Vagrant* (https://www.vagrantup.com/) in your OS (it is multiplatform!), and review and/or modify the files to build a VM automatically adapted to your needs. **NOTE**: Due to the experimental *disks* features, the default version of *Vagrant* that comes with the *Ubuntu* repos (at least until 20.04) cannot fun these VMs. **PLEASE USE THE LATEST VERSION VAGRANT AVAILABLE IN THE OFFICIAL VENDOR PAGE** (or remove the disks feature, but then you cannot resize it to your needs :( ). 
 
 ### Ubuntu_full ###
 
@@ -15,7 +15,15 @@ A full *Ubuntu 18.04* machine VM, 2 cores, 2Gb of RAM and 80Gb of dynamic hard d
   * A custom provision bash script installing: full updates, the XFC4 GUI (yes, I know, but, again, this is a teaching VM ;)), some common tools for our course, a *sudoer* user (*ssiuser*) with a known password (please change it!), *Docker* and *Docker Compose*. It also changes they keyboard layout to Spanish (we are a Spanish University! :D). **PLEASE DO REVIEW THIS FILE BEFORE INSTALLING ANYTHING**, to adapt their contents to your needs. 
   * Some trivial scripts to do common operations without requiring *Vagrant* knowledge: *build* (run first), *run* (run second), *update* (re-provision the VM) and *destroy* (so you have to rebuild it after) the created VM. 
 
-This VM has been used and tested without problems from over 100 people. It also relies on official repos of all software installed. Hope you find it useful!
+### Ubuntu_cmd_docker ###
+
+This is a version of the previous VM without the XFCE4 GUI and associated programs and also minimizing the required installation time and space by not installing recommended packages and wiping the apt cache at the end. The goal is that if you export this VM to an .ova the required space is the less possible. *Docker* and *Docker Compose* (and Guest Additions) are still installed for lab fun :)
+
+### Ubuntu_cmd ###
+
+A version of *Ubuntu_cmd_docker* without *Docker* and *Docker Compose*. It is a throw-away testing VM with all the *Vagrant* optimizations we implemented. Guest Additions are still installed.
+
+These VMs have been used and tested without problems from over 100 people. They also rely on official repos of all software installed. Hope you find them useful!
       
 ## Dockerfiles ##
 
