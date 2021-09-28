@@ -1,0 +1,64 @@
+version: "2"
+services:
+    webproxy2A:
+        image: ssi/ubuntu_apache_ssh
+        container_name: webproxy2A
+        restart: on-failure
+        volumes:
+            - ./webs/web1:/var/www/html
+        networks:
+            back_net2:
+                ipv4_address: 172.116.0.3
+    webproxy2B:
+        image: ssi/ubuntu_apache_ssh
+        container_name: webproxy2B
+        restart: on-failure
+        volumes:
+            - ./webs/web2:/var/www/html
+        networks:
+            back_net2:
+                ipv4_address: 172.116.0.4
+    webproxy2C:
+        image: ssi/ubuntu_apache_ssh
+        container_name: webproxy2C
+        restart: on-failure
+        volumes:
+            - ./webs/web3:/var/www/html
+        networks:
+            back_net2:
+                ipv4_address: 172.116.0.5
+    reverse_proxy2:
+        image: ssi/ubuntu_apache_proxy
+        container_name: reverse_proxy2
+        restart: on-failure
+        volumes:
+            - ./apache_conf:/cluster_conf
+        networks:
+            back_net2:
+                ipv4_address: 172.116.0.2
+            front_net2:
+                ipv4_address: 198.72.0.3
+    labproxy2_kali:
+        image: ssi/kali_base
+        container_name: labproxy2_kali
+        restart: on-failure
+        stdin_open: true # docker run -i
+        tty: true        # docker run -t
+        volumes:
+            - ./volume_data/kali:/root/shared
+        networks:
+            default:
+            front_net2:
+                ipv4_address: 198.72.0.2
+
+networks:
+    back_net2:
+        driver: bridge
+        ipam:
+            config:
+                - subnet: 172.116.0.0/16
+    front_net2:
+        driver: bridge
+        ipam:
+            config:
+                - subnet: 198.72.0.0/16
