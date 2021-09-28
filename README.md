@@ -79,5 +79,6 @@ The provided labs are:
 
 * *sample_lab*: laboratory that communicates a *kali_base* container called *kali_attack* with a *ubuntu_apache_ssh_highly_vulnerable* container called *ubuntu_victim* for testing *nmap*
 * *proxy_lab*: laboratory that communicates a Kali container (*labproxy_kali*) with an Ubuntu reverse proxy (*reverse_proxy*) with a custom 198.62.0.0/16 network (*front_net*). Additionally, the reverse proxy communicates with a web server via another different custom 172.106.0.0/16 network (*back_net*). Performing a *curl* from the Kali to the IP 172.62.0.3 (reverse proxy static IP) returns the web page on the web server, served from 172.106.0.3 (web server static IP). Note that the *Kali* is unable to reach the web server IP, and the reverse proxy is the only "gate" to access the web. This schema can be enhanced to create your own reverse proxy "hide all the workings of my network" fun! :D
+* *proxy_lab2*: Version of the previous one, but the reverse proxy hide three different websites, so accessing 172.62.0.3/web1, 172.62.0.3/web2 and 172.62.0.3/web3 show three different webpages. This is a more "realistic" use case than the previous one :) 
  
 I hope you enjoy experimenting with these materials! 
