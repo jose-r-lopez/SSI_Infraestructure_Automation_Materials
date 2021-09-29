@@ -73,9 +73,9 @@ Once described the utility scripts, let's enumerate the *Docker* images we have 
 
 While the VM is our "test field" and the *Docker* images are our "test subjets", we coordinate *Docker* containers inside the VM thanks to *Docker Compose* (https://docs.docker.com/compose/) files, that run and communicate containers of different images to run the labs we want for each laboratory. To show how we do that, we have provided some labs. Once you install *Docker Compose*, all labs are automated with the following scripts:
 
-* *prepare_lab.sh*: Run this script first to create all the Docker images involved in this lab. Place the Labs directory in the same directory as the Dockerfiles directory, and this wll ensure that all the images will be built automatically without having to worry about the dependencies between them.
-* *build_lab.sh*: Runs this lab. Please do not kill the process on the terminal you run this script, or the lab will be destroyed. To continue working, just spawn another terminal.
-* *enter_X.sh*: Login on each container of the infrastructure
+* **prepare_lab.sh**: Run this script first to create all the Docker images involved in this lab. Place the Labs directory in the same directory as the Dockerfiles directory, and this wll ensure that all the images will be built automatically without having to worry about the dependencies between them.
+* **build_lab.sh**: Runs this lab. Please do not kill the process on the terminal you run this script, or the lab will be destroyed. To continue working, just spawn another terminal.
+* **enter_X.sh**: Login on each container of the infrastructure
 
 The provided labs are:
 
