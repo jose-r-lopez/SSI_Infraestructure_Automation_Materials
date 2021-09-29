@@ -1,0 +1,64 @@
+version: "2"
+services:
+    weblbA:
+        image: ssi/ubuntu_apache_ssh
+        container_name: weblbA
+        restart: on-failure
+        volumes:
+            - ./webs/web:/var/www/html
+        networks:
+            back_net3:
+                ipv4_address: 172.126.0.3
+    weblbB:
+        image: ssi/ubuntu_apache_ssh
+        container_name: weblbB
+        restart: on-failure
+        volumes:
+            - ./webs/web2:/var/www/html
+        networks:
+            back_net3:
+                ipv4_address: 172.126.0.4
+    weblbC:
+        image: ssi/ubuntu_apache_ssh
+        container_name: weblbC
+        restart: on-failure
+        volumes:
+            - ./webs/web3:/var/www/html
+        networks:
+            back_net3:
+                ipv4_address: 172.126.0.5
+    reverse_proxy3:
+        image: ssi/ubuntu_nginx_proxy
+        container_name: reverse_proxy3
+        restart: on-failure
+        volumes:
+            - ./nginx_conf:/cluster_conf
+        networks:
+            back_net3:
+                ipv4_address: 172.126.0.2
+            front_net3:
+                ipv4_address: 198.82.0.3
+    labproxy3_kali:
+        image: ssi/kali_base
+        container_name: labproxy3_kali
+        restart: on-failure
+        stdin_open: true # docker run -i
+        tty: true        # docker run -t
+        volumes:
+            - ./volume_data/kali:/root/shared
+        networks:
+            default:
+            front_net3:
+                ipv4_address: 198.82.0.2
+
+networks:
+    back_net3:
+        driver: bridge
+        ipam:
+            config:
+                - subnet: 172.126.0.0/16
+    front_net3:
+        driver: bridge
+        ipam:
+            config:
+                - subnet: 198.82.0.0/16
