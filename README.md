@@ -42,32 +42,32 @@ Please, do take this warning very seriously, these are **NOT** production-ready 
 
 To use all this you need to install *Docker* (https://www.docker.com/) in a machine or VM. The VM built with the previous *Vagrantfile* installs it precisely with this in mind ;) ;) ;) (yeah, we build labs with different intercommunicated containers inside that VM, saving TONS of resources if compared with a "traditional" all-VM approach, and we think it is beatiful! :D). Once this is clarified, let's describe the contents: 
 
-* *build.sh*: Our "workhorse" script to build any image we need. We just need to use the -d parameter to pass a path that should have the following contents (Ex. *./build.sh -d ./ubuntus/ubuntu_base/*):
+* **build.sh**: Our "workhorse" script to build any image we need. We just need to use the -d parameter to pass a path that should have the following contents (Ex. *./build.sh -d ./ubuntus/ubuntu_base/*):
   * A *Dockerfile* with the instructions of the image to build
   * A *img_name.txt* file with the name of the image to be built
   * Any other necessary file used in the Dockerfile
-* *start_cmd.sh*: After building an image, this used the same approach with the -d parameter to run a container of the image built with the contents of the specified path (./start_cmd.sh -d ./ubuntus/ubuntu_base/).
-* *start_cmd_writable_dir.sh*: Same as previous, but allow to specify a host and a guest path that can be used to easily share files between the host and the containers. Two extra parameters allows to map any path, but if not provided a default one is used (./start_cmd_writable_dir.sh -d ./ubuntus/ubuntu_base/).
-* *start_detached.sh*: Same as *start_cmd.sh*, but no bash shell is created. This is meant to run containers that keep a foreground service running. If not, the container will be terminated inmediately!
+* **start_cmd.sh**: After building an image, this used the same approach with the -d parameter to run a container of the image built with the contents of the specified path (./start_cmd.sh -d ./ubuntus/ubuntu_base/).
+* **start_cmd_writable_dir.sh**: Same as previous, but allow to specify a host and a guest path that can be used to easily share files between the host and the containers. Two extra parameters allows to map any path, but if not provided a default one is used (./start_cmd_writable_dir.sh -d ./ubuntus/ubuntu_base/).
+* **start_detached.sh**: Same as *start_cmd.sh*, but no bash shell is created. This is meant to run containers that keep a foreground service running. If not, the container will be terminated inmediately!
 
 Once described the utility scripts, let's enumerate the *Docker* images we have uploaded (**NOTE:** We have minimized the size of these images, and that means that the *apt* cache has been deleted. If you wanna install something in these images, please run *apt update* first):
 
 ### Ubuntus ###
 
-* *ubuntus/ubuntu_base*: An *Ubuntu 18.04* image with some common commands to test. This is also the base of all the following *Ubuntu* images, so **you must ensure that this image is built first before using any of the others!**
-* *ubuntus/ubuntu_apache*: Uses the previous image and adds the Apache Web Server. Please build the *ubuntus/ubuntu_base* first!
-* *ubuntus/ubuntu_ssh*: Uses the *ubuntus/ubuntu_base* image and adds a SSH server, a user and a trivial password (**NOT SECURE!**). Please build the *ubuntus/ubuntu_base* first!
-* *ubuntus/ubuntu_apache_ssh*: Uses the *ubuntus/ubuntu_apache* image and adds a SSH server, a user and a trivial password (**NOT SECURE!**). Please build the *ubuntus/ubuntu_apache* first!. We also provide a sample script on how you could map any web page you have in the host to be served by this container. 
-* *ubuntus/ubuntu_apache_ssh_highly_vulnerable*: Uses the *ubuntus/ubuntu_apache_ssh* image and adds a FTP and a telnet server and a *sudoer* user and a trivial password (**NOT SECURE!**). Please build the *ubuntus/ubuntu_apache_ssh* first!.
-* *ubuntus/ubuntu_apache_proxy*: Just uses *ssi/ubuntu_apache_ssh* to enable reverse proxy functionality, installing no additional packages. The initialization script expects to find an *apache2.conf* file to copy to */etc/apache2/* in the */cluster_conf* directory. This way, it is easy using *Docker Compose* to map a custom *apache2.conf* file to this folder and use it to configure different labs with the same infrastructure (see *proxy_lab* for details!).
-* *ubuntus/ubuntu_nginx_proxy*: Uses *ssi/ubuntu_ssh* (please build it first) to install *Nginx* and configure it as a load balancer. It is prepared to copy the *nginx.conf* file and the *default* website configuration files from the */cluster_conf* directory (see the *lb_lab* for a working example!)
+* **ubuntus/ubuntu_base**: An *Ubuntu 18.04* image with some common commands to test. This is also the base of all the following *Ubuntu* images, so **you must ensure that this image is built first before using any of the others!**
+* **ubuntus/ubuntu_apache**: Uses the previous image and adds the Apache Web Server. Please build the *ubuntus/ubuntu_base* first!
+* **ubuntus/ubuntu_ssh**: Uses the *ubuntus/ubuntu_base* image and adds a SSH server, a user and a trivial password (**NOT SECURE!**). Please build the *ubuntus/ubuntu_base* first!
+* **ubuntus/ubuntu_apache_ssh**: Uses the *ubuntus/ubuntu_apache* image and adds a SSH server, a user and a trivial password (**NOT SECURE!**). Please build the *ubuntus/ubuntu_apache* first!. We also provide a sample script on how you could map any web page you have in the host to be served by this container. 
+* **ubuntus/ubuntu_apache_ssh_highly_vulnerable**: Uses the *ubuntus/ubuntu_apache_ssh* image and adds a FTP and a telnet server and a *sudoer* user and a trivial password (**NOT SECURE!**). Please build the *ubuntus/ubuntu_apache_ssh* first!.
+* **ubuntus/ubuntu_apache_proxy**: Just uses *ssi/ubuntu_apache_ssh* to enable reverse proxy functionality, installing no additional packages. The initialization script expects to find an *apache2.conf* file to copy to */etc/apache2/* in the */cluster_conf* directory. This way, it is easy using *Docker Compose* to map a custom *apache2.conf* file to this folder and use it to configure different labs with the same infrastructure (see *proxy_lab* for details!).
+* **ubuntus/ubuntu_nginx_proxy**: Uses *ssi/ubuntu_ssh* (please build it first) to install *Nginx* and configure it as a load balancer. It is prepared to copy the *nginx.conf* file and the *default* website configuration files from the */cluster_conf* directory (see the *lb_lab* for a working example!)
 
 
 ### Kalis ###
 
-* *kalis/kali_base*: A *Kali Linux* image with the same interactive capabilities of the equivalent Ubuntu one and also adding nmap. This is also the base of all the following *Kali* images, so **you must ensure that this image is built first before using any of the others!** 
-* *kalis/kali_crypto*: Adds to the base *Kali* several tools to perform several password brute-forcing, dictionary generation and metadata extraction operations. It also incoporates commented instructions to add and uncompress the rockyou.txt password dictionary (that you will have to download) and to copy sample passwd and shadow files to test brute-forcing operations (that you will have to provide). Please build the *kalis/kalil_base* first!
-* *kalis/kali_exploiting*: Adds to the base *Kali* several tools to perform several exploiting operations, including a *Metasploit Framework* installation. Please build the *kalis/kalil_base* first!. **NOTE: This image is actually quite large! (1.4Gb approximately)**. 
+* **kalis/kali_base**: A *Kali Linux* image with the same interactive capabilities of the equivalent Ubuntu one and also adding nmap. This is also the base of all the following *Kali* images, so **you must ensure that this image is built first before using any of the others!** 
+* **kalis/kali_crypto**: Adds to the base *Kali* several tools to perform several password brute-forcing, dictionary generation and metadata extraction operations. It also incoporates commented instructions to add and uncompress the rockyou.txt password dictionary (that you will have to download) and to copy sample passwd and shadow files to test brute-forcing operations (that you will have to provide). Please build the *kalis/kalil_base* first!
+* **kalis/kali_exploiting**: Adds to the base *Kali* several tools to perform several exploiting operations, including a *Metasploit Framework* installation. Please build the *kalis/kalil_base* first!. **NOTE: This image is actually quite large! (1.4Gb approximately)**. 
 
 ## Labs ##
 
@@ -79,9 +79,9 @@ While the VM is our "test field" and the *Docker* images are our "test subjets",
 
 The provided labs are:
 
-* *sample_lab*: laboratory that communicates a *kali_base* container called *kali_attack* with a *ubuntu_apache_ssh_highly_vulnerable* container called *ubuntu_victim* for testing *nmap*
-* *proxy_lab*: laboratory that communicates a Kali container (*labproxy_kali*) with an Ubuntu reverse proxy (*reverse_proxy*) with a custom 198.62.0.0/16 network (*front_net*). Additionally, the reverse proxy communicates with a web server via another different custom 172.106.0.0/16 network (*back_net*). Performing a *curl* from the Kali to the IP 172.62.0.3 (reverse proxy static IP) returns the web page on the web server, served from 172.106.0.3 (web server static IP). Note that the *Kali* is unable to reach the web server IP, and the reverse proxy is the only "gate" to access the web. This schema can be enhanced to create your own reverse proxy "hide all the workings of my network" fun! :D
-* *proxy_lab2*: Version of the previous one, but the reverse proxy hide three different websites, so accessing 172.62.0.3/web1, 172.62.0.3/web2 and 172.62.0.3/web3 show three different webpages. This is a more "realistic" use case than the previous one :) 
-* *lb_lab*: A Round-Robin Load balancer made with an *Nginx upstream* configuration context and three *Apache* nodes behind it. If from the *Kali* you *curl* to the reverse proxy IP you will obtain a response from different web servers using a Round-Robin algorithm.  
+* **sample_lab**: laboratory that communicates a *kali_base* container called *kali_attack* with a *ubuntu_apache_ssh_highly_vulnerable* container called *ubuntu_victim* for testing *nmap*
+* **proxy_lab**: laboratory that communicates a Kali container (*labproxy_kali*) with an Ubuntu reverse proxy (*reverse_proxy*) with a custom 198.62.0.0/16 network (*front_net*). Additionally, the reverse proxy communicates with a web server via another different custom 172.106.0.0/16 network (*back_net*). Performing a *curl* from the Kali to the IP 172.62.0.3 (reverse proxy static IP) returns the web page on the web server, served from 172.106.0.3 (web server static IP). Note that the *Kali* is unable to reach the web server IP, and the reverse proxy is the only "gate" to access the web. This schema can be enhanced to create your own reverse proxy "hide all the workings of my network" fun! :D
+* **proxy_lab2**: Version of the previous one, but the reverse proxy hide three different websites, so accessing 172.62.0.3/web1, 172.62.0.3/web2 and 172.62.0.3/web3 show three different webpages. This is a more "realistic" use case than the previous one :) 
+* **lb_lab**: A Round-Robin Load balancer made with an *Nginx upstream* configuration context and three *Apache* nodes behind it. If from the *Kali* you *curl* to the reverse proxy IP you will obtain a response from different web servers using a Round-Robin algorithm.  
  
 I hope you enjoy experimenting with these materials! 
