@@ -82,6 +82,16 @@ The provided labs are:
 * **sample_lab**: laboratory that communicates a *kali_base* container called *kali_attack* with a *ubuntu_apache_ssh_highly_vulnerable* container called *ubuntu_victim* for testing *nmap*
 * **proxy_lab**: laboratory that communicates a Kali container (*labproxy_kali*) with an Ubuntu reverse proxy (*reverse_proxy*) with a custom 198.62.0.0/16 network (*front_net*). Additionally, the reverse proxy communicates with a web server via another different custom 172.106.0.0/16 network (*back_net*). Performing a *curl* from the Kali to the IP 172.62.0.3 (reverse proxy static IP) returns the web page on the web server, served from 172.106.0.3 (web server static IP). Note that the *Kali* is unable to reach the web server IP, and the reverse proxy is the only "gate" to access the web. This schema can be enhanced to create your own reverse proxy "hide all the workings of my network" fun! :D
 * **proxy_lab2**: Version of the previous one, but the reverse proxy hide three different websites, so accessing 172.62.0.3/web1, 172.62.0.3/web2 and 172.62.0.3/web3 show three different webpages. This is a more "realistic" use case than the previous one :) 
-* **lb_lab**: A Round-Robin Load balancer made with an *Nginx upstream* configuration context and three *Apache* nodes behind it. If from the *Kali* you *curl* to the reverse proxy IP you will obtain a response from different web servers using a Round-Robin algorithm.  
- 
+* **lb_lab**: A Round-Robin Load balancer made with an *Nginx upstream* configuration context and three *Apache* nodes behind it. If from the *Kali* you *curl* to the reverse proxy IP you will obtain a response from different web servers using a Round-Robin algorithm. **NOTE**: If you feel like testing other load distribution algorithms, I strongly recommend you to check this web page: http://nginx.org/en/docs/http/load_balancing.html. This allows you to make simple changes to the *nginx.conf* of this lab to try other approaches. The *ip_hash* directive is specially interesting, as it uses the *sticky session* concept (once a node of a cluster servers a client, this client is served always by the same node) to achieve session persistence (unless the node dies! :D). Thanks Diego Suarez (@mafias in *Twitter*) for reminding me this!  
+
 I hope you enjoy experimenting with these materials! 
+
+## Coming soon! ## (if possible, and not necessarily in this order :D)
+
+- A local network with several web servers and an integrated DNS because putting IPs is cool but not realistic :P
+- A lab with a working the *mod_security* WAF for web bombarding fun :P
+- A lab with a working *Suricata* IDS, because the guy from "What If?" is not the only watching :P
+- A lab with a vulnerable web that is also part of my portfolio of public tools. Although I don't know if I can pull this one out :P
+- Terraform examples
+- LXC examples
+ 
