@@ -1,0 +1,62 @@
+version: "2"
+services:
+    webdnsA:
+        image: ssi/ubuntu_apache_ssh
+        container_name: webdnsA
+        restart: on-failure
+        dns: 172.136.0.2
+        volumes:
+            - ./webs/web1:/var/www/html
+        networks:
+            dns_net:
+                ipv4_address: 172.136.0.3
+    webdnsB:
+        image: ssi/ubuntu_apache_ssh
+        container_name: webdnsB
+        restart: on-failure
+        dns: 172.136.0.2
+        volumes:
+            - ./webs/web2:/var/www/html
+        networks:
+            dns_net:
+                ipv4_address: 172.136.0.4
+    webdnsC:
+        image: ssi/ubuntu_apache_ssh
+        container_name: webdnsC
+        restart: on-failure
+        dns: 172.136.0.2
+        volumes:
+            - ./webs/web3:/var/www/html
+        networks:
+            dns_net:
+                ipv4_address: 172.136.0.5
+    dns:
+        image: ssi/ubuntu_dns
+        container_name: labdns_dns
+        restart: on-failure
+        volumes:
+            - ./dns_conf:/dns_conf
+        networks:
+            dns_net:
+                ipv4_address: 172.136.0.2
+    dnslab_kali:
+        image: ssi/kali_base
+        container_name: dnslab_kali
+        restart: on-failure
+        stdin_open: true # docker run -i
+        tty: true        # docker run -t
+        dns: 172.136.0.2
+        volumes:
+            - ./volume_data/kali:/root/shared
+        networks:
+            default:
+            dns_net:
+                ipv4_address: 172.136.0.6
+
+networks:
+    dns_net:
+        driver: bridge
+        ipam:
+            config:
+                - subnet: 172.136.0.0/16
+

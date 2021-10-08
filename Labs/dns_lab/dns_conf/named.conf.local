@@ -1,0 +1,4 @@
+zone "ssi.es" {
+    type master;
+    file "/etc/bind/zones/db.ssi.es";
+};
