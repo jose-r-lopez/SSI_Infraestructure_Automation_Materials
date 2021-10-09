@@ -8,7 +8,7 @@ At the moment we have:
 
 ## Vagrantfiles ##
 
-The goal of these files is to create a folder, download them to it, install *Vagrant* (https://www.vagrantup.com/) in your OS (it is multiplatform!), and review and/or modify the files to build a VM automatically adapted to your needs. **NOTE**: Due to the experimental *disks* features, the default version of *Vagrant* that comes with the *Ubuntu* repos (at least until 20.04) cannot fun these VMs. **PLEASE USE THE LATEST VERSION VAGRANT AVAILABLE IN THE OFFICIAL VENDOR PAGE** (or remove the disks feature, but then you cannot resize it to your needs :( ). 
+The goal of these files is to create a folder, download them to it, install *Vagrant* (https://www.vagrantup.com/) in your OS (it is multiplatform!), and review and/or modify the files to build a VM automatically adapted to your needs. **NOTE**: Due to the experimental *disks* features, the default version of *Vagrant* that comes with the *Ubuntu* repos (at least until 20.04) cannot run these VMs. **PLEASE USE THE LATEST VERSION VAGRANT AVAILABLE IN THE OFFICIAL VENDOR PAGE** (or remove the disks feature, but then you cannot resize it to your needs :( ). 
 
 ### Ubuntu_full ###
 
