@@ -1,6 +1,10 @@
 # SSI_Materials
 
-In the course *Seguridad de Sistemas Informáticos* (SSI, Computer Systems Security) from the *Escuela de Ingeniería Informática* of the University of Oviedo (https://ingenieriainformatica.uniovi.es/) we have developed a series of automated infrastructure deployment scripts that we think it may be useful for some people, so we decided to share them to enable our students (or anyone ;)) to use and experiment with them if they please. We will be updating this repo over time with new materials we can share. At the moment we have:
+In the course *Seguridad de Sistemas Informáticos* (SSI, Computer Systems Security) from the *Escuela de Ingeniería Informática* of the University of Oviedo (https://ingenieriainformatica.uniovi.es/) we have developed a series of automated infrastructure deployment scripts that we think it may be useful for some people, so we decided to share them to enable our students (or anyone ;)) to use and experiment with them if they please. We will be updating this repo over time with new materials we can share. 
+
+**NOTE**: Make sure you check my tool cheatsheet repository to facilitate learning how to use these tools inside this laboratories! (https://github.com/jose-r-lopez/SSI_Cheatsheets).
+
+At the moment we have:
 
 ## Vagrantfiles ##
 
