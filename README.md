@@ -28,7 +28,19 @@ This is a version of the previous VM without the XFCE4 GUI and associated progra
 A version of *Ubuntu_cmd_docker* without *Docker* and *Docker Compose*. It is a throw-away testing VM with all the *Vagrant* optimizations we implemented. Guest Additions are still installed.
 
 These VMs have been used and tested without problems from over 100 people. They also rely on official repos of all software installed. Hope you find them useful!
-      
+
+### Kali_gui ###
+
+This is an VM made from the *kalilinux/rolling*, with GUI, VirtualBox optimizations, typical command line programs and other elements similar to the other VMs. The base box only supports *VirtualBox* and *VMWare* hypervisors. There are three main things to consider though:
+
+- The VM is created from the latest *kalilinux/rolling* box but **its packages are not upgraded** (*apt* package list is updated though). This was done on purpose to have a Kali VM up and running quickly, as updates take a **LONG** time to complete.
+- The default user is *vagrant* and the password is *test123...*. Please change the password for continuous usage. There is another *sudoer* user called *ssiuser* but you need to change its password from the command line previously to use it.
+- There is an unused partition of 80Gb you can enable with *gparted*/*fdisk* and use it at your will. The base box does not change its main partition size once you resize the disk upon VM creation.
+
+### Win_scripts ###
+
+Due to popular interest, here I have put the *Vagrant* automation scripts in *.bat* format, so they can run on Windows. You can replace any scripts from the previous VMs with these if you are in a *Windows* host.
+
 ## Dockerfiles ##
 
 These are a collection of *Dockerfiles* that build *Ubuntu* and *Kali* images suited for specific purposes, such as testing general OS commands, web server, SSH server, etc., all fulfilling a requirement of the different topics of our course. We also supply some utility scripts for your convenience. All *Dockerfiles* use official product repos to build the images, and are configured to minimize the space taken by each image and speed up its build process. 
