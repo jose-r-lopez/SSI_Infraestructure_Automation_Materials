@@ -1,0 +1,77 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+ENV['VAGRANT_EXPERIMENTAL'] = 'disks'
+
+
+Vagrant.configure("2") do |config|
+  # For a complete reference, please see the online documentation at
+  # https://docs.vagrantup.com.
+
+  config.vm.box = "kalilinux/rolling"
+
+  # The base Vagrant box supports VirtualBox, Hyper-V and VMWare Desktop. 
+
+  # This is the VirtualBox VM solution. Use this if you can, as it has more options and optimizations
+  config.vm.provider "virtualbox" do |vb|
+    vb.name = "KaliSSIGUI"
+    # If you can afford it, more memory is always welcome :)
+    vb.memory = 4096
+    # If you can afford it, more cores are always welcome :)
+    vb.cpus = 2
+    vb.gui = true
+
+    # Base configuration
+    vb.customize ["modifyvm", :id, "--audio", "none"]        
+    vb.customize ["modifyvm", :id, "--clipboard-mode", "bidirectional"]
+    vb.customize ["modifyvm", :id, "--description", "SSI Base Ubuntu image (2021)"]    
+    vb.customize ["modifyvm", :id, "--ostype", "Ubuntu_64"]
+
+    # High-performance configuration: please note that several of these options are not available in the VirtualBox GUI
+    # Thus, the performance of this machine should be higher than the ones created via GUI
+
+    # Use VBoxManage to customize the VM for high-performance options and other things
+    vb.customize ["modifyvm", :id, "--acpi", "on"]
+    vb.customize ["modifyvm", :id, "--accelerate3d", "on"]
+    vb.customize ["modifyvm", :id, "--apic", "on"]    
+    vb.customize ["modifyvm", :id, "--biosapic", "x2apic"]  
+    vb.customize ["modifyvm", :id, "--cpu-profile", "host"]
+    vb.customize ["modifyvm", :id, "--graphicscontroller", "vmsvga"]
+    vb.customize ["modifyvm", :id, "--hpet", "on"]
+    vb.customize ["modifyvm", :id, "--hwvirtex", "on"]
+    vb.customize ["modifyvm", :id, "--largepages", "on"]
+    vb.customize ["modifyvm", :id, "--longmode", "on"]
+    vb.customize ["modifyvm", :id, "--nestedpaging", "on"]            
+    vb.customize ["modifyvm", :id, "--pae", "on"]
+    vb.customize ["modifyvm", :id, "--pagefusion", "on"]
+    vb.customize ["modifyvm", :id, "--rtcuseutc", "on"]
+    vb.customize ["modifyvm", :id, "--spec-ctrl", "off"]
+    vb.customize ["modifyvm", :id, "--x2apic", "on"]
+    vb.customize ["modifyvm", :id, "--vram", "64"]
+    vb.customize ["modifyvm", :id, "--vtxux", "on"]  
+    vb.customize ["modifyvm", :id, "--vtxvpid", "on"]
+		    
+    vb.customize ["storagectl", :id, "--name", "IDE Controller", "--hostiocache", "on"]
+
+     # Shared folder (host path, guest path)
+     config.vm.synced_folder "./shared", "/host_data"
+     
+     # Enable provisioning with a custom shell script.     
+     config.vm.provision "file", source: "nanorc", destination: "/home/vagrant/.nanorc"     
+     config.vm.provision "file", source: "tmux.conf", destination: "/home/vagrant/tmux.conf"
+     config.vm.provision "shell", path: "provision_vbox.sh"
+  end
+  
+  # Untested VMWare Desktop very basic configuration
+  config.vm.provider "vmware_desktop" do |vmw|
+    vmw.gui = true
+    vmw.vmx["memsize"] = "2048"
+    vmw.vmx["numvcpus"] = "2"
+    config.vm.provision "file", source: "nanorc", destination: "/home/vagrant/.nanorc"     
+    config.vm.provision "file", source: "tmux.conf", destination: "/home/vagrant/tmux.conf"
+    config.vm.provision "shell", path: "provision_vmware.sh"
+  end
+  
+  
+  # Disk size
+  config.vm.disk :disk, size: "120GB", primary: true
+end
