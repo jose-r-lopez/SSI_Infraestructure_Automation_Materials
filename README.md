@@ -37,6 +37,18 @@ This is an VM made from the *kalilinux/rolling*, with GUI, VirtualBox optimizati
 - The default user is *vagrant* and the password is *test123...*. Please change the password for continuous usage. There is another *sudoer* user called *ssiuser* but you need to change its password from the command line previously to use it.
 - There is an unused partition of 80Gb you can enable with *gparted*/*fdisk* and use it at your will. The base box does not change its main partition size once you resize the disk upon VM creation.
 
+### CentOS_cmd ###
+
+A *CentOS 8 Stream* VM fully updated, no GUI, and with the same command-line features as the rest of machines. Please note that:
+- The base box only support the *VirtualBox* and *Libvirt* (with *KVM* or *QEMU*) hypervisors. There is a configuration for *libvirt*, but unfortunately it could not be tested.
+- If you are using a *VirtualBox* hypervisor, run the *buidvm_vbox.bat* file instead of the *buildvm.bat* to get *VirtualBox Guest Additions* automatically installed.
+- You need the latest version of *VirtualBox* to avoid problems if you decide to install the *VirtualBox Guest Additions*, as they are automatically retrieved from the latest available online.
+- The user is *vagrant* (sudoer) and its password is *test123...*.
+
+### CentOS_GUI ###
+
+A version of the previous VM with the XFCE4 GUI installed. It does not boot to the GUI by default, to enable it you have to run *startx*.
+
 ### Win_scripts ###
 
 Due to popular interest, here I have put the *Vagrant* automation scripts in *.bat* format, so they can run on Windows. You can replace any scripts from the previous VMs with these if you are in a *Windows* host.
