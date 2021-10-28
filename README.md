@@ -49,6 +49,25 @@ A *CentOS 8 Stream* VM fully updated, no GUI, and with the same command-line fea
 
 A version of the previous VM with the XFCE4 GUI installed. It does not boot to the GUI by default, to enable it you have to run *startx*.
 
+### UbuntuDesktop ###
+
+This is am Ubuntu 20.04LTS updated installation using the same features that the previous Ubuntu VMs, but with a default Gnome Desktop and some additional every-day use software that can come handy to several use cases. Please note that VM is big: 8Gb RAM and 4 cores are requested by default (change these at will):
+
+- ClamTK antimalware
+- GIMP image editing 
+- Inkscape image editing
+- Krita image editing
+- Visual Studio Code
+- TexMaker for Latex edition
+- Microsoft Teams
+- Calibre for managing epubs
+- OpenShot for video editing
+- Okular for file viewing
+- Kodi for media playback
+- Brave browser for ad-free navigation
+- ffmpeg library for console-based media manipulation
+- Nmap for network investigation
+
 ### Win_scripts ###
 
 Due to popular interest, here I have put the *Vagrant* automation scripts in *.bat* format, so they can run on Windows. You can replace any scripts from the previous VMs with these if you are in a *Windows* host.
