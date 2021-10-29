@@ -51,7 +51,7 @@ A version of the previous VM with the XFCE4 GUI installed. It does not boot to t
 
 ### UbuntuDesktop ###
 
-This is am Ubuntu 20.04LTS updated installation using the same features that the previous Ubuntu VMs, but with a default Gnome Desktop and some additional every-day use software that can come handy to several use cases. Please note that VM is big: 8Gb RAM and 4 cores are requested by default (change these at will):
+This is an *Ubuntu 20.04LTS* updated installation using the same features that the previous Ubuntu VMs, but with a default *Gnome Desktop* and some additional every-day use software that can come handy for several use cases. Please note that this VM is big: 8Gb RAM and 4 cores are requested by default (change these at will). Unfortunately, the base box only supports *VirtualBox* hypervisor:
 
 - ClamTK antimalware
 - GIMP image editing 
