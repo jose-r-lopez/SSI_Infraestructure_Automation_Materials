@@ -1,0 +1,10 @@
+# /etc/default/portsentry
+#  
+# This file is read by /etc/init.d/portsentry. See the portsentry.8 
+# manpage for details.
+#
+# The options in this file refer to commandline arguments (all in lowercase)
+# of portsentry. Use only one tcp and udp mode at a time.
+#
+TCP_MODE="atcp"
+UDP_MODE="audp"
