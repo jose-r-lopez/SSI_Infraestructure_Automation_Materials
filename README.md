@@ -9,8 +9,14 @@ Please check this repo *Wiki* (https://github.com/jose-r-lopez/SSI_Materials/wik
  **NEW 2.0 VERSION AVAILABLE!!**. Features:
  
  - More *Vagrant* machines (see wiki)
- - Multiple bug fixes
+ - Multiple bug fixes. Provisioners will not run multiple times any longer.
  - New (and proper!) way of using *Vagrant*, that decreases the number of possible incidents, greatly decreases build times, and ensures better VM deployment.
  - Refactoring of *Vagrant* provisioners to greatly increase modularity, maintainability, and facilitate building new machines combining calls to existing scripts. Code once, reuse everywhere!
  - New automatically hardened Ubuntu increasing its Lynis hardening score **from 89 to 94 points!**. Don't miss this machine to learn more about OS hardening!
+ - Linux (bash) and Windows (bat) scripts included together for improved usability.
+ - New and improved documentation
+
+Like? Stars are appreciated :)
+Use? If you let me know I will be happy!
+Have VMWare Desktop or libvirt and you can help me to polish my scripts with these hypervisors? As I don't have them right now, any help will be appreciated!
  
