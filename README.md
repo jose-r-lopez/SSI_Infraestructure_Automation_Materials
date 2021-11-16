@@ -8,9 +8,9 @@ Please check this repo *Wiki* (https://github.com/jose-r-lopez/SSI_Materials/wik
  
  **NEW 2.0 VERSION AVAILABLE!!**. Features:
  
- - More machines (see wiki)
+ - More *Vagrant* machines (see wiki)
  - Multiple bug fixes
- - New (and proper!) way of using Vagrant, that decreases the number of possible incidents, greatly decreases build times, and ensures better VM deployment.
- - Refactoring of provisioners to greatly increase modularity, maintainability, and facilitate building new machines combining calls to existing scripts. Code once, reuse everywhere!
+ - New (and proper!) way of using *Vagrant*, that decreases the number of possible incidents, greatly decreases build times, and ensures better VM deployment.
+ - Refactoring of *Vagrant* provisioners to greatly increase modularity, maintainability, and facilitate building new machines combining calls to existing scripts. Code once, reuse everywhere!
  - New automatically hardened Ubuntu increasing its Lynis hardening score **from 89 to 94 points!**. Don't miss this machine to learn more about OS hardening!
  
