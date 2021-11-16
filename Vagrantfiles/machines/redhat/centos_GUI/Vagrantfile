@@ -1,0 +1,149 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# This gives us the ability of resizing disks from the size put in the Vagrant Box. Some OS may force you to use gparted or similar to really take advantage of the extra space you put here. 
+ENV['VAGRANT_EXPERIMENTAL'] = 'disks'
+
+###################################################################################################
+### 					GENERAL CONTROL VARIABLES 				###
+###################################################################################################
+
+# Please use only Vagrant Boxes from the Vagrant Cloud that come from trusted or official providers!
+
+## Machine Info:
+## -------------
+
+# This base Vagrant box supports VirtualBox, Hyper-V and VMWare Desktop.
+BOX_NAME = "centos/8"
+
+# The name of the box that will appear into the GUI 
+MACHINE_NAME = "CentOS 8 GUI"
+
+# The description of the box that will show into the GUI 
+MACHINE_DESCRIPTION = "CentOS 8 base image with GUI"
+
+# Type of OS, needed for some of the Hypervisors
+OS_TYPE = "RedHat_64"
+
+# This determines the set of customization scripts that will be used
+OS_CLASS = "redhat"
+
+## Machine Characteristics:
+## ------------------------
+
+# In Mb, if you can afford it, more memory is always welcome :). Be careful not to push this too hard, and turn yourself into a Chrome browser :P 
+RAM = 2048
+
+# If you can afford it, more cores are always welcome :). Be careful not to push this too hard, and let your host breathe :P
+CORES = 2
+
+# Size of the box disk
+DISK_SIZE = "80GB"
+
+# Amount of available VRAM. Consider if your VM is going to have a GUI or not to choose this.
+VRAM = 128
+
+# The name of the HD controller greatly varies depending on the box you use
+HD_CONTROLLER = "IDE"
+
+## Virtualization parameters:
+## --------------------------
+
+# Change to false to run the machine in headless mode (i. e. no VBox Window will be open)
+GUI = true
+
+# Audio device, or none for servers
+AUDIO = "none"
+
+# Turns on/off 3D acceleration. This does not behave too well on some Linux distros if turned on right now (at least in VirtualBox), so better leave it as you found it! (I tested!). 
+VIDEO_3D = "off"
+
+# VirtualBox remote screen
+VRDE = "off"
+
+## Provisioning parameters:
+## --------------------------
+
+# Type of provisioner. I only use shell provisioners to not requiring installing more software. But this makes it easy to incorporate Ansible, Puppet, Chef or whatever automation you like!
+PROVISION_TYPE = "shell"
+
+# Provisioner file extension
+PROVISION_FILE_EXTENSION = ".sh"
+
+###################################################################################################
+### 				VIRTUAL MACHINE CONFIGURATION 					###
+###################################################################################################
+
+Vagrant.configure("2") do |config|
+  # For a complete reference, please see the online documentation at
+  # https://docs.vagrantup.com.
+  Vagrant.require_version ">= 2.1.18"
+
+  config.vm.box = BOX_NAME
+  config.vm.disk :disk, size: DISK_SIZE, primary: true
+
+  # Copy the files required by the Box provisioner
+  config.vm.provision "file", source: "../../../customization_files/" + OS_CLASS + "_customization/", destination: "/home/vagrant/custom_files" 
+  config.vm.provision "file", source: "../../../customization_scripts/" + OS_CLASS + "_customization/", destination: "/home/vagrant/custom_scripts"
+ 
+  # Automatically install software   
+  config.vm.provision "Software Installation", type: PROVISION_TYPE, path: "provisioners/" + PROVISION_TYPE + "/provision_step1" + PROVISION_FILE_EXTENSION, reboot: true 
+  config.vm.provision "Updated VM Tools Installation", type: PROVISION_TYPE, path: "provisioners/" + PROVISION_TYPE + "/provision_step2" + PROVISION_FILE_EXTENSION, reboot: true 
+
+  # This is the VirtualBox VM solution. Use this if you can, as it has more options and optimizations
+  config.vm.provider "virtualbox" do |vb|
+    vb.name = MACHINE_NAME  
+    vb.memory = RAM
+    vb.cpus = CORES
+    vb.gui = GUI
+
+    # Base configuration
+    # vb.customize ["modifyvm", :id, "--audio", AUDIO]        
+    vb.customize ["modifyvm", :id, "--clipboard-mode", "bidirectional"]
+    vb.customize ["modifyvm", :id, "--description", MACHINE_DESCRIPTION]    
+    vb.customize ["modifyvm", :id, "--ostype", OS_TYPE]
+
+    # High-performance configuration: please note that several of these options are not available in the VirtualBox GUI
+    # Thus, the performance of this machine should be higher than the ones created via GUI
+
+    # Use VBoxManage to customize the VM for high-performance options and other things
+    vb.customize ["modifyvm", :id, "--acpi", "on"]
+    vb.customize ["modifyvm", :id, "--accelerate3d", VIDEO_3D]
+    vb.customize ["modifyvm", :id, "--apic", "on"]    
+    vb.customize ["modifyvm", :id, "--biosapic", "x2apic"]  
+    vb.customize ["modifyvm", :id, "--cpu-profile", "host"]
+    vb.customize ["modifyvm", :id, "--graphicscontroller", "vmsvga"]
+    vb.customize ["modifyvm", :id, "--hpet", "on"]
+    vb.customize ["modifyvm", :id, "--hwvirtex", "on"]
+    vb.customize ["modifyvm", :id, "--largepages", "on"]
+    vb.customize ["modifyvm", :id, "--longmode", "on"]
+    vb.customize ["modifyvm", :id, "--nestedpaging", "on"]            
+    vb.customize ["modifyvm", :id, "--pae", "on"]
+    # If you have a MAC host and get an error, comment this line, as this feature is not currently supported on MAC (yet)
+    vb.customize ["modifyvm", :id, "--pagefusion", "on"]
+    vb.customize ["modifyvm", :id, "--rtcuseutc", "on"]
+    vb.customize ["modifyvm", :id, "--spec-ctrl", "off"]
+    vb.customize ["modifyvm", :id, "--x2apic", "on"]
+    vb.customize ["modifyvm", :id, "--vram", VRAM]
+    vb.customize ["modifyvm", :id, "--vtxux", "on"]  
+    vb.customize ["modifyvm", :id, "--vtxvpid", "on"]	
+    vb.customize ["modifyvm", :id, "--vrde", VRDE]	    
+    vb.customize ["storagectl", :id, "--name", HD_CONTROLLER, "--hostiocache", "on"]
+
+    # Shared folder (host path, guest path)
+    # config.vm.synced_folder "./shared", "/host_data"     
+  end
+
+
+  # Libvirt with very basic configuration (UNTESTED!!)
+  config.vm.provider :libvirt do |libvirt|
+    libvirt.driver = "kvm"
+    # Change the driver depending on your installation
+    # libvirt.driver = "qemu"
+    
+    libvirt.cpus = CORES
+    libvirt.memory = RAM
+    libvirt.storage_pool_name = "default"
+    libvirt.disk_driver :cache => 'default'
+  end
+end
