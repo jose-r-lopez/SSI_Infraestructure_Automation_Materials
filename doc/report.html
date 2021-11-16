@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+body {background-color: black;}
+pre {
+	font-weight: normal;
+	color: #bbb;
+	white-space: -moz-pre-wrap;
+	white-space: -o-pre-wrap;
+	white-space: -pre-wrap;
+	white-space: pre-wrap;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+}
+b {font-weight: normal}
+b.BOLD {color: #fff}
+b.ITA {font-style: italic}
+b.UND {text-decoration: underline}
+b.STR {text-decoration: line-through}
+b.UNDSTR {text-decoration: underline line-through}
+b.BLK {color: #000000}
+b.RED {color: #aa0000}
+b.GRN {color: #00aa00}
+b.YEL {color: #aa5500}
+b.BLU {color: #0000aa}
+b.MAG {color: #aa00aa}
+b.CYN {color: #00aaaa}
+b.WHI {color: #aaaaaa}
+b.HIK {color: #555555}
+b.HIR {color: #ff5555}
+b.HIG {color: #55ff55}
+b.HIY {color: #ffff55}
+b.HIB {color: #5555ff}
+b.HIM {color: #ff55ff}
+b.HIC {color: #55ffff}
+b.HIW {color: #ffffff}
+b.BBLK {background-color: #000000}
+b.BRED {background-color: #aa0000}
+b.BGRN {background-color: #00aa00}
+b.BYEL {background-color: #aa5500}
+b.BBLU {background-color: #0000aa}
+b.BMAG {background-color: #aa00aa}
+b.BCYN {background-color: #00aaaa}
+b.BWHI {background-color: #aaaaaa}
+</style>
+</head>
+<body>
+<pre>
+<b class=HIW>[ Lynis 3.0.6 ]</b>
+
+################################################################################
+  Lynis comes with ABSOLUTELY NO WARRANTY. This is free software, and you are
+  welcome to redistribute it under the terms of the GNU General Public License.
+  See the LICENSE file for details about using this software.
+
+  2007-2021, CISOfy - https://cisofy.com/lynis/
+  Enterprise support available (compliance, plugins, interface and tools)
+################################################################################
+
+
+[+] <b class=HIY>Initializing program</b>
+------------------------------------
+  - Detecting OS...                                           [ <b class=HIG>DONE</b> ]
+  - Checking profiles...                                      [ <b class=HIG>DONE</b> ]
+
+  ---------------------------------------------------
+  Program version:           3.0.6
+  Operating system:          Linux
+  Operating system name:     Ubuntu
+  Operating system version:  18.04
+  Kernel version:            4.15.0
+  Hardware platform:         x86_64
+  Hostname:                  vagrant
+  ---------------------------------------------------
+  Profiles:                  /etc/lynis/default.prf
+  Log file:                  /var/log/lynis.log
+  Report file:               /var/log/lynis-report.dat
+  Report version:            1.0
+  Plugin directory:          /usr/share/lynis/plugins
+  ---------------------------------------------------
+  Auditor:                   [Not Specified]
+  Language:                  en
+  Test category:             all
+  Test group:                all
+  ---------------------------------------------------
+  - Program update status...                                  [ <b class=HIG>NO UPDATE</b> ]
+
+[+] <b class=HIY>System tools</b>
+------------------------------------
+  - Scanning available tools...                              
+  - Checking system binaries...                              
+
+[+] <b class=HIM>Plugins (phase 1)</b>
+------------------------------------
+ Note: plugins have more extensive tests and may take several minutes to complete 
+   
+  - Plugins enabled                                           [ <b class=HIW>NONE</b> ]
+
+[+] <b class=HIY>Boot and services</b>
+------------------------------------
+  - Service Manager                                           [ <b class=HIG>systemd</b> ]
+  - Checking UEFI boot                                        [ <b class=HIW>DISABLED</b> ]
+  - Checking presence GRUB                                    [ <b class=HIG>OK</b> ]
+  - Checking presence GRUB2                                   [ <b class=HIG>FOUND</b> ]
+    - Checking for password protection                        [ <b class=HIG>OK</b> ]
+  - Check running services (systemctl)                        [ <b class=HIG>DONE</b> ]
+        Result: found 31 running services                    
+  - Check enabled services at boot (systemctl)                [ <b class=HIG>DONE</b> ]
+        Result: found 47 enabled services                    
+  - Check startup files (permissions)                         [ <b class=HIG>OK</b> ]
+
+[+] <b class=HIY>Kernel</b>
+------------------------------------
+  - Checking default run level                                [ <b class=HIG>RUNLEVEL 5</b> ]
+  - Checking CPU support (NX/PAE)                            
+    CPU support: PAE and/or NoeXecute supported               [ <b class=HIG>FOUND</b> ]
+  - Checking kernel version and release                       [ <b class=HIG>DONE</b> ]
+  - Checking kernel type                                      [ <b class=HIG>DONE</b> ]
+  - Checking loaded kernel modules                            [ <b class=HIG>DONE</b> ]
+      Found 92 active modules                                
+  - Checking Linux kernel configuration file                  [ <b class=HIG>FOUND</b> ]
+  - Checking default I/O kernel scheduler                     [ <b class=HIG>FOUND</b> ]
+  - Checking for available kernel update                      [ <b class=HIG>OK</b> ]
+  - Checking core dumps configuration                        
+    - configuration in systemd conf files                     [ <b class=HIG>DISABLED</b> ]
+    - configuration in etc/profile                            [ <b class=HIW>DEFAULT</b> ]
+    - 'hard' configuration in security/limits.conf            [ <b class=HIG>DISABLED</b> ]
+    - 'soft' configuration in security/limits.conf            [ <b class=HIG>DISABLED</b> ]
+    - Checking setuid core dumps configuration                [ <b class=HIG>DISABLED</b> ]
+  - Check if reboot is needed                                 [ <b class=HIG>NO</b> ]
+
+[+] <b class=HIY>Memory and Processes</b>
+------------------------------------
+  - Checking /proc/meminfo                                    [ <b class=HIG>FOUND</b> ]
+  - Searching for dead/zombie processes                       [ <b class=HIG>NOT FOUND</b> ]
+  - Searching for IO waiting processes                        [ <b class=HIG>NOT FOUND</b> ]
+  - Search prelink tooling                                    [ <b class=HIG>NOT FOUND</b> ]
+
+[+] <b class=HIY>Users, Groups and Authentication</b>
+------------------------------------
+  - Administrator accounts                                    [ <b class=HIG>OK</b> ]
+  - Unique UIDs                                               [ <b class=HIG>OK</b> ]
+  - Consistency of group files (grpck)                        [ <b class=HIG>OK</b> ]
+  - Unique group IDs                                          [ <b class=HIG>OK</b> ]
+  - Unique group names                                        [ <b class=HIG>OK</b> ]
+  - Password file consistency                                 [ <b class=HIG>OK</b> ]
+  - Password hashing methods                                  [ <b class=HIY>SUGGESTION</b> ]
+  - Password hashing rounds (minimum)                         [ <b class=HIG>CONFIGURED</b> ]
+  - Query system users (non daemons)                          [ <b class=HIG>DONE</b> ]
+  - NIS+ authentication support                               [ <b class=HIW>NOT ENABLED</b> ]
+  - NIS authentication support                                [ <b class=HIW>NOT ENABLED</b> ]
+  - Sudoers file(s)                                           [ <b class=HIG>FOUND</b> ]
+    - Permissions for directory: /etc/sudoers.d               [ <b class=HIG>OK</b> ]
+    - Permissions for: /etc/sudoers                           [ <b class=HIG>OK</b> ]
+    - Permissions for: /etc/sudoers.d/README                  [ <b class=HIG>OK</b> ]
+    - Permissions for: /etc/sudoers.d/99_vagrant              [ <b class=HIG>OK</b> ]
+  - PAM password strength tools                               [ <b class=HIG>OK</b> ]
+  - PAM configuration files (pam.conf)                        [ <b class=HIG>FOUND</b> ]
+  - PAM configuration files (pam.d)                           [ <b class=HIG>FOUND</b> ]
+  - PAM modules                                               [ <b class=HIG>FOUND</b> ]
+  - LDAP module in PAM                                        [ <b class=HIW>NOT FOUND</b> ]
+  - Accounts without expire date                              [ <b class=HIY>SUGGESTION</b> ]
+  - Accounts without password                                 [ <b class=HIG>OK</b> ]
+  - Locked accounts                                           [ <b class=HIG>OK</b> ]
+  - User password aging (minimum)                             [ <b class=HIG>CONFIGURED</b> ]
+  - User password aging (maximum)                             [ <b class=HIG>CONFIGURED</b> ]
+  - Checking expired passwords                                [ <b class=HIG>OK</b> ]
+  - Checking Linux single user mode authentication            [ <b class=HIG>OK</b> ]
+  - Determining default umask                                
+    - umask (/etc/profile and /etc/profile.d)                 [ <b class=HIG>OK</b> ]
+    - umask (/etc/login.defs)                                 [ <b class=HIG>OK</b> ]
+  - LDAP authentication support                               [ <b class=HIW>NOT ENABLED</b> ]
+  - Logging failed login attempts                             [ <b class=HIG>ENABLED</b> ]
+
+[+] <b class=HIY>Shells</b>
+------------------------------------
+  - Checking shells from /etc/shells                         
+    Result: found 6 shells (valid shells: 6).                
+    - Session timeout settings/tools                          [ <b class=HIG>FOUND</b> ]
+  - Checking default umask values                            
+    - Checking default umask in /etc/bash.bashrc              [ <b class=HIG>OK</b> ]
+    - Checking default umask in /etc/profile                  [ <b class=HIG>OK</b> ]
+
+[+] <b class=HIY>File systems</b>
+------------------------------------
+  - Checking mount points                                    
+    - Checking /home mount point                              [ <b class=HIY>SUGGESTION</b> ]
+    - Checking /tmp mount point                               [ <b class=HIY>SUGGESTION</b> ]
+    - Checking /var mount point                               [ <b class=HIY>SUGGESTION</b> ]
+  - Checking LVM volume groups                                [ <b class=HIG>FOUND</b> ]
+    - Checking LVM volumes                                    [ <b class=HIG>FOUND</b> ]
+  - Query swap partitions (fstab)                             [ <b class=HIG>OK</b> ]
+  - Testing swap partitions                                   [ <b class=HIG>OK</b> ]
+  - Testing /proc mount (hidepid)                             [ <b class=HIY>SUGGESTION</b> ]
+  - Checking for old files in /tmp                            [ <b class=HIG>OK</b> ]
+  - Checking /tmp sticky bit                                  [ <b class=HIG>OK</b> ]
+  - Checking /var/tmp sticky bit                              [ <b class=HIG>OK</b> ]
+  - ACL support root file system                              [ <b class=HIG>ENABLED</b> ]
+  - Mount options of /                                        [ <b class=HIY>NON DEFAULT</b> ]
+  - Mount options of /dev                                     [ <b class=HIG>HARDENED</b> ]
+  - Mount options of /dev/shm                                 [ <b class=HIG>HARDENED</b> ]
+  - Mount options of /run                                     [ <b class=HIG>HARDENED</b> ]
+  - Total without nodev:11 noexec:11 nosuid:9 ro or noexec (W^X): 11 of total 34 
+  - Checking Locate database                                  [ <b class=HIG>FOUND</b> ]
+  - Disable kernel support of some filesystems               
+    - Module cramfs is blacklisted                            [ <b class=HIG>OK</b> ]
+    - Module freevxfs is blacklisted                          [ <b class=HIG>OK</b> ]
+    - Module hfs is blacklisted                               [ <b class=HIG>OK</b> ]
+    - Module hfsplus is blacklisted                           [ <b class=HIG>OK</b> ]
+    - Module jffs2 is blacklisted                             [ <b class=HIG>OK</b> ]
+    - Module udf is blacklisted                               [ <b class=HIG>OK</b> ]
+
+[+] <b class=HIY>USB Devices</b>
+------------------------------------
+  - Checking usb-storage driver (modprobe config)             [ <b class=HIW>NOT DISABLED</b> ]
+  - Checking USB devices authorization                        [ <b class=HIG>DISABLED</b> ]
+  - Checking USBGuard                                         [ <b class=HIG>FOUND</b> ]
+    - Configuration                                           [ <b class=HIG>FOUND</b> ]
+      - Restore controller device state                       [ <b class=HIG>false</b> ]
+      - Rule for controllers connected before daemon starts   [ <b class=HIY>keep</b> ]
+      - Rule for devices connected before daemon starts       [ <b class=HIG>apply-policy</b> ]
+      - Rule for devices inserted after daemon starts         [ <b class=HIG>apply-policy</b> ]
+      - Rule for devices not in RuleFile                      [ <b class=HIG>block</b> ]
+    - RuleFile                                                [ <b class=HIG>FOUND</b> ]
+      - Controllers &amp; Devices allow                           [ <b class=HIW>0</b> ]
+      - Controllers &amp; Devices block                           [ <b class=HIW>0</b> ]
+      - Controllers &amp; Devices reject                          [ <b class=HIW>0</b> ]
+
+[+] <b class=HIY>Storage</b>
+------------------------------------
+  - Checking firewire ohci driver (modprobe config)           [ <b class=HIG>DISABLED</b> ]
+
+[+] <b class=HIY>NFS</b>
+------------------------------------
+  - Query rpc registered programs                             [ <b class=HIG>DONE</b> ]
+  - Query NFS versions                                        [ <b class=HIG>DONE</b> ]
+  - Query NFS protocols                                       [ <b class=HIG>DONE</b> ]
+  - Check running NFS daemon                                  [ <b class=HIW>NOT FOUND</b> ]
+
+[+] <b class=HIY>Name services</b>
+------------------------------------
+  - Checking /etc/resolv.conf options                         [ <b class=HIG>FOUND</b> ]
+  - Searching DNS domain name                                 [ <b class=HIY>UNKNOWN</b> ]
+  - Checking /etc/hosts                                      
+    - Duplicate entries in hosts file                         [ <b class=HIG>NONE</b> ]
+    - Presence of configured hostname in /etc/hosts           [ <b class=HIY>NOT FOUND</b> ]
+    - Hostname mapped to localhost                            [ <b class=HIG>NOT FOUND</b> ]
+    - Localhost mapping to IP address                         [ <b class=HIG>OK</b> ]
+
+[+] <b class=HIY>Ports and packages</b>
+------------------------------------
+  - Searching package managers                               
+    - Searching dpkg package manager                          [ <b class=HIG>FOUND</b> ]
+      - Querying package manager                             
+    - Query unpurged packages                                 [ <b class=HIG>NONE</b> ]
+    - debsums utility                                         [ <b class=HIG>FOUND</b> ]
+      - Cron job for debsums                                  [ <b class=HIG>FOUND</b> ]
+  - Checking security repository in sources.list file         [ <b class=HIG>OK</b> ]
+  - Checking APT package database                             [ <b class=HIG>OK</b> ]
+  - Checking vulnerable packages                              [ <b class=HIG>OK</b> ]
+
+  <b class="BLK BYEL">[WARNING]</b>: Test PKGS-7392 had a long execution: 26.073765 seconds
+
+  - Checking upgradeable packages                             [ <b class=HIG>NONE</b> ]
+  - Checking package audit tool                               [ <b class=HIG>INSTALLED</b> ]
+    Found: apt-check                                         
+  - Toolkit for automatic upgrades (unattended-upgrade)       [ <b class=HIG>FOUND</b> ]
+
+[+] <b class=HIY>Networking</b>
+------------------------------------
+  - Checking IPv6 configuration                               [ <b class=HIW>ENABLED</b> ]
+      Configuration method                                    [ <b class=HIW>AUTO</b> ]
+      IPv6 only                                               [ <b class=HIW>NO</b> ]
+  - Checking configured nameservers                          
+    - Testing nameservers                                    
+        Nameserver: 127.0.0.53                                [ <b class=HIG>OK</b> ]
+    - DNSSEC supported (systemd-resolved)                     [ <b class=HIG>YES</b> ]
+  - Checking default gateway                                  [ <b class=HIG>DONE</b> ]
+  - Getting listening ports (TCP/UDP)                         [ <b class=HIG>DONE</b> ]
+  - Checking promiscuous interfaces                           [ <b class=HIG>OK</b> ]
+  - Checking waiting connections                              [ <b class=HIG>OK</b> ]
+  - Checking status DHCP client                              
+  - Checking for ARP monitoring software                      [ <b class=HIG>RUNNING</b> ]
+  - Uncommon network protocols                                [ <b class=HIG>NOT FOUND</b> ]
+
+[+] <b class=HIY>Printers and Spools</b>
+------------------------------------
+  - Checking cups daemon                                      [ <b class=HIW>NOT FOUND</b> ]
+  - Checking lp daemon                                        [ <b class=HIW>NOT RUNNING</b> ]
+
+[+] <b class=HIY>Software: e-mail and messaging</b>
+------------------------------------
+  - Postfix status                                            [ <b class=HIG>RUNNING</b> ]
+    - Postfix configuration                                   [ <b class=HIG>FOUND</b> ]
+
+[+] <b class=HIY>Software: firewalls</b>
+------------------------------------
+  - Checking iptables kernel module                           [ <b class=HIG>FOUND</b> ]
+    - Checking iptables policies of chains                    [ <b class=HIG>FOUND</b> ]
+    - Checking for empty ruleset                              [ <b class=HIG>OK</b> ]
+    - Checking for unused rules                               [ <b class=HIY>FOUND</b> ]
+  - Checking host based firewall                              [ <b class=HIG>ACTIVE</b> ]
+
+[+] <b class=HIY>Software: webserver</b>
+------------------------------------
+  - Checking Apache                                           [ <b class=HIW>NOT FOUND</b> ]
+  - Checking nginx                                            [ <b class=HIW>NOT FOUND</b> ]
+
+[+] <b class=HIY>SSH Support</b>
+------------------------------------
+  - Checking running SSH daemon                               [ <b class=HIG>FOUND</b> ]
+    - Searching SSH configuration                             [ <b class=HIG>FOUND</b> ]
+    - OpenSSH option: AllowTcpForwarding                      [ <b class=HIG>OK</b> ]
+    - OpenSSH option: ClientAliveCountMax                     [ <b class=HIG>OK</b> ]
+    - OpenSSH option: ClientAliveInterval                     [ <b class=HIG>OK</b> ]
+    - OpenSSH option: Compression                             [ <b class=HIG>OK</b> ]
+    - OpenSSH option: FingerprintHash                         [ <b class=HIG>OK</b> ]
+    - OpenSSH option: GatewayPorts                            [ <b class=HIG>OK</b> ]
+    - OpenSSH option: IgnoreRhosts                            [ <b class=HIG>OK</b> ]
+    - OpenSSH option: LoginGraceTime                          [ <b class=HIG>OK</b> ]
+    - OpenSSH option: LogLevel                                [ <b class=HIG>OK</b> ]
+    - OpenSSH option: MaxAuthTries                            [ <b class=HIG>OK</b> ]
+    - OpenSSH option: MaxSessions                             [ <b class=HIG>OK</b> ]
+    - OpenSSH option: PermitRootLogin                         [ <b class=HIG>OK</b> ]
+    - OpenSSH option: PermitUserEnvironment                   [ <b class=HIG>OK</b> ]
+    - OpenSSH option: PermitTunnel                            [ <b class=HIG>OK</b> ]
+    - OpenSSH option: Port                                    [ <b class=HIG>OK</b> ]
+    - OpenSSH option: PrintLastLog                            [ <b class=HIG>OK</b> ]
+    - OpenSSH option: StrictModes                             [ <b class=HIG>OK</b> ]
+    - OpenSSH option: TCPKeepAlive                            [ <b class=HIG>OK</b> ]
+    - OpenSSH option: UseDNS                                  [ <b class=HIG>OK</b> ]
+    - OpenSSH option: X11Forwarding                           [ <b class=HIG>OK</b> ]
+    - OpenSSH option: AllowAgentForwarding                    [ <b class=HIG>OK</b> ]
+    - OpenSSH option: AllowUsers                              [ <b class=HIW>NOT FOUND</b> ]
+    - OpenSSH option: AllowGroups                             [ <b class=HIW>NOT FOUND</b> ]
+
+[+] <b class=HIY>SNMP Support</b>
+------------------------------------
+  - Checking running SNMP daemon                              [ <b class=HIW>NOT FOUND</b> ]
+
+[+] <b class=HIY>Databases</b>
+------------------------------------
+    No database engines found                                
+
+[+] <b class=HIY>LDAP Services</b>
+------------------------------------
+  - Checking OpenLDAP instance                                [ <b class=HIW>NOT FOUND</b> ]
+
+[+] <b class=HIY>PHP</b>
+------------------------------------
+  - Checking PHP                                              [ <b class=HIW>NOT FOUND</b> ]
+
+[+] <b class=HIY>Squid Support</b>
+------------------------------------
+  - Checking running Squid daemon                             [ <b class=HIW>NOT FOUND</b> ]
+
+[+] <b class=HIY>Logging and files</b>
+------------------------------------
+  - Checking for a running log daemon                         [ <b class=HIG>OK</b> ]
+    - Checking Syslog-NG status                               [ <b class=HIW>NOT FOUND</b> ]
+    - Checking systemd journal status                         [ <b class=HIG>FOUND</b> ]
+    - Checking Metalog status                                 [ <b class=HIW>NOT FOUND</b> ]
+    - Checking RSyslog status                                 [ <b class=HIG>FOUND</b> ]
+    - Checking RFC 3195 daemon status                         [ <b class=HIW>NOT FOUND</b> ]
+    - Checking minilogd instances                             [ <b class=HIW>NOT FOUND</b> ]
+  - Checking logrotate presence                               [ <b class=HIG>OK</b> ]
+  - Checking remote logging                                   [ <b class=HIY>NOT ENABLED</b> ]
+  - Checking log directories (static list)                    [ <b class=HIG>DONE</b> ]
+  - Checking open log files                                   [ <b class=HIG>DONE</b> ]
+  - Checking deleted files in use                             [ <b class=HIG>DONE</b> ]
+
+[+] <b class=HIY>Insecure services</b>
+------------------------------------
+  - Installed inetd package                                   [ <b class=HIG>NOT FOUND</b> ]
+  - Installed xinetd package                                  [ <b class=HIG>OK</b> ]
+    - xinetd status                                          
+  - Installed rsh client package                              [ <b class=HIG>OK</b> ]
+  - Installed rsh server package                              [ <b class=HIG>OK</b> ]
+  - Installed telnet client package                           [ <b class=HIG>OK</b> ]
+  - Installed telnet server package                           [ <b class=HIG>NOT FOUND</b> ]
+  - Checking NIS client installation                          [ <b class=HIG>OK</b> ]
+  - Checking NIS server installation                          [ <b class=HIG>OK</b> ]
+  - Checking TFTP client installation                         [ <b class=HIG>OK</b> ]
+  - Checking TFTP server installation                         [ <b class=HIG>OK</b> ]
+
+[+] <b class=HIY>Banners and identification</b>
+------------------------------------
+  - /etc/issue                                                [ <b class=HIG>FOUND</b> ]
+    - /etc/issue contents                                     [ <b class=HIG>OK</b> ]
+  - /etc/issue.net                                            [ <b class=HIG>FOUND</b> ]
+    - /etc/issue.net contents                                 [ <b class=HIG>OK</b> ]
+
+[+] <b class=HIY>Scheduled tasks</b>
+------------------------------------
+  - Checking crontab and cronjob files                        [ <b class=HIG>DONE</b> ]
+
+[+] <b class=HIY>Accounting</b>
+------------------------------------
+  - Checking accounting information                           [ <b class=HIG>OK</b> ]
+  - Checking sysstat accounting data                          [ <b class=HIG>ENABLED</b> ]
+  - Checking auditd                                           [ <b class=HIG>ENABLED</b> ]
+    - Checking audit rules                                    [ <b class=HIG>OK</b> ]
+    - Checking audit configuration file                       [ <b class=HIG>OK</b> ]
+    - Checking auditd log file                                [ <b class=HIG>FOUND</b> ]
+
+[+] <b class=HIY>Time and Synchronization</b>
+------------------------------------
+
+[+] <b class=HIY>Cryptography</b>
+------------------------------------
+  - Checking for expired SSL certificates [0/131]             [ <b class=HIG>NONE</b> ]
+
+  <b class="BLK BYEL">[WARNING]</b>: Test CRYP-7902 had a long execution: 12.180541 seconds
+
+  - Found 0 encrypted and 1 unencrypted swap devices in use.  [ <b class=HIW>OK</b> ]
+  - Kernel entropy is sufficient                              [ <b class=HIG>YES</b> ]
+  - HW RNG &amp; rngd                                             [ <b class=HIY>NO</b> ]
+  - SW prng                                                   [ <b class=HIY>NO</b> ]
+  - MOR variable not found                                    [ <b class=HIW>WEAK</b> ]
+
+[+] <b class=HIY>Virtualization</b>
+------------------------------------
+
+[+] <b class=HIY>Containers</b>
+------------------------------------
+
+[+] <b class=HIY>Security frameworks</b>
+------------------------------------
+  - Checking presence AppArmor                                [ <b class=HIG>FOUND</b> ]
+    - Checking AppArmor status                                [ <b class=HIG>ENABLED</b> ]
+        Found 46 unconfined processes                        
+  - Checking presence SELinux                                 [ <b class=HIW>NOT FOUND</b> ]
+  - Checking presence TOMOYO Linux                            [ <b class=HIW>NOT FOUND</b> ]
+  - Checking presence grsecurity                              [ <b class=HIW>NOT FOUND</b> ]
+  - Checking for implemented MAC framework                    [ <b class=HIG>OK</b> ]
+
+[+] <b class=HIY>Software: file integrity</b>
+------------------------------------
+  - Checking file integrity tools                            
+    - AIDE                                                    [ <b class=HIG>FOUND</b> ]
+      - AIDE config file                                      [ <b class=HIG>FOUND</b> ]
+      - AIDE database                                         [ <b class=HIG>FOUND</b> ]
+  - dm-integrity (status)                                     [ <b class=HIW>DISABLED</b> ]
+  - dm-verity (status)                                        [ <b class=HIW>DISABLED</b> ]
+      - AIDE config (Checksum)                                [ <b class=HIG>OK</b> ]
+  - Checking presence integrity tool                          [ <b class=HIG>FOUND</b> ]
+
+[+] <b class=HIY>Software: System tooling</b>
+------------------------------------
+  - Checking automation tooling                              
+  - Automation tooling                                        [ <b class=HIY>NOT FOUND</b> ]
+  - Checking presence of Fail2ban                             [ <b class=HIG>FOUND</b> ]
+    - Checking Fail2ban jails                                 [ <b class=HIG>ENABLED</b> ]
+  - Checking for IDS/IPS tooling                              [ <b class=HIG>FOUND</b> ]
+
+[+] <b class=HIY>Software: Malware</b>
+------------------------------------
+  - Checking chkrootkit                                       [ <b class=HIG>FOUND</b> ]
+  - Checking ClamAV scanner                                   [ <b class=HIG>FOUND</b> ]
+
+[+] <b class=HIY>File Permissions</b>
+------------------------------------
+  - Starting file permissions check                          
+    File: /boot/grub/grub.cfg                                 [ <b class=HIG>OK</b> ]
+    File: /etc/crontab                                        [ <b class=HIG>OK</b> ]
+    File: /etc/group                                          [ <b class=HIG>OK</b> ]
+    File: /etc/group-                                         [ <b class=HIG>OK</b> ]
+    File: /etc/hosts.allow                                    [ <b class=HIG>OK</b> ]
+    File: /etc/hosts.deny                                     [ <b class=HIG>OK</b> ]
+    File: /etc/issue                                          [ <b class=HIG>OK</b> ]
+    File: /etc/issue.net                                      [ <b class=HIG>OK</b> ]
+    File: /etc/passwd                                         [ <b class=HIG>OK</b> ]
+    File: /etc/passwd-                                        [ <b class=HIG>OK</b> ]
+    File: /etc/ssh/sshd_config                                [ <b class=HIG>OK</b> ]
+    Directory: /etc/cron.d                                    [ <b class=HIG>OK</b> ]
+    Directory: /etc/cron.daily                                [ <b class=HIG>OK</b> ]
+    Directory: /etc/cron.hourly                               [ <b class=HIG>OK</b> ]
+    Directory: /etc/cron.weekly                               [ <b class=HIG>OK</b> ]
+    Directory: /etc/cron.monthly                              [ <b class=HIG>OK</b> ]
+
+[+] <b class=HIY>Home directories</b>
+------------------------------------
+  - Permissions of home directories                           [ <b class=HIG>OK</b> ]
+  - Ownership of home directories                             [ <b class=HIG>OK</b> ]
+  - Checking shell history files                              [ <b class=HIG>OK</b> ]
+
+[+] <b class=HIY>Kernel Hardening</b>
+------------------------------------
+  - Comparing sysctl key pairs with scan profile             
+    - dev.tty.ldisc_autoload (exp: 0)                         [ <b class=HIG>OK</b> ]
+    - fs.protected_fifos (exp: 2)                             [ <b class=HIG>OK</b> ]
+    - fs.protected_hardlinks (exp: 1)                         [ <b class=HIG>OK</b> ]
+    - fs.protected_regular (exp: 2)                           [ <b class=HIG>OK</b> ]
+    - fs.protected_symlinks (exp: 1)                          [ <b class=HIG>OK</b> ]
+    - fs.suid_dumpable (exp: 0)                               [ <b class=HIG>OK</b> ]
+    - kernel.core_uses_pid (exp: 1)                           [ <b class=HIG>OK</b> ]
+    - kernel.ctrl-alt-del (exp: 0)                            [ <b class=HIG>OK</b> ]
+    - kernel.dmesg_restrict (exp: 1)                          [ <b class=HIG>OK</b> ]
+    - kernel.kptr_restrict (exp: 2)                           [ <b class=HIG>OK</b> ]
+    - kernel.modules_disabled (exp: 1)                        [ <b class=HIR>DIFFERENT</b> ]
+    - kernel.perf_event_paranoid (exp: 3)                     [ <b class=HIG>OK</b> ]
+    - kernel.randomize_va_space (exp: 2)                      [ <b class=HIG>OK</b> ]
+    - kernel.sysrq (exp: 0)                                   [ <b class=HIG>OK</b> ]
+    - kernel.unprivileged_bpf_disabled (exp: 1)               [ <b class=HIG>OK</b> ]
+    - kernel.yama.ptrace_scope (exp: 1 2 3)                   [ <b class=HIG>OK</b> ]
+    - net.core.bpf_jit_harden (exp: 2)                        [ <b class=HIG>OK</b> ]
+    - net.ipv4.conf.all.accept_redirects (exp: 0)             [ <b class=HIG>OK</b> ]
+    - net.ipv4.conf.all.accept_source_route (exp: 0)          [ <b class=HIG>OK</b> ]
+    - net.ipv4.conf.all.bootp_relay (exp: 0)                  [ <b class=HIG>OK</b> ]
+    - net.ipv4.conf.all.forwarding (exp: 0)                   [ <b class=HIG>OK</b> ]
+    - net.ipv4.conf.all.log_martians (exp: 1)                 [ <b class=HIG>OK</b> ]
+    - net.ipv4.conf.all.mc_forwarding (exp: 0)                [ <b class=HIG>OK</b> ]
+    - net.ipv4.conf.all.proxy_arp (exp: 0)                    [ <b class=HIG>OK</b> ]
+    - net.ipv4.conf.all.rp_filter (exp: 1)                    [ <b class=HIG>OK</b> ]
+    - net.ipv4.conf.all.send_redirects (exp: 0)               [ <b class=HIG>OK</b> ]
+    - net.ipv4.conf.default.accept_redirects (exp: 0)         [ <b class=HIG>OK</b> ]
+    - net.ipv4.conf.default.accept_source_route (exp: 0)      [ <b class=HIG>OK</b> ]
+    - net.ipv4.conf.default.log_martians (exp: 1)             [ <b class=HIG>OK</b> ]
+    - net.ipv4.icmp_echo_ignore_broadcasts (exp: 1)           [ <b class=HIG>OK</b> ]
+    - net.ipv4.icmp_ignore_bogus_error_responses (exp: 1)     [ <b class=HIG>OK</b> ]
+    - net.ipv4.tcp_syncookies (exp: 1)                        [ <b class=HIG>OK</b> ]
+    - net.ipv4.tcp_timestamps (exp: 0 1)                      [ <b class=HIG>OK</b> ]
+    - net.ipv6.conf.all.accept_redirects (exp: 0)             [ <b class=HIG>OK</b> ]
+    - net.ipv6.conf.all.accept_source_route (exp: 0)          [ <b class=HIG>OK</b> ]
+    - net.ipv6.conf.default.accept_redirects (exp: 0)         [ <b class=HIG>OK</b> ]
+    - net.ipv6.conf.default.accept_source_route (exp: 0)      [ <b class=HIG>OK</b> ]
+
+[+] <b class=HIY>Hardening</b>
+------------------------------------
+    - Installed compiler(s)                                   [ <b class=HIR>FOUND</b> ]
+    - Installed malware scanner                               [ <b class=HIG>FOUND</b> ]
+    - Non-native binary formats                               [ <b class=HIG>NOT FOUND</b> ]
+
+[+] <b class=HIY>Custom tests</b>
+------------------------------------
+  - Running custom tests...                                   [ <b class=HIW>NONE</b> ]
+
+[+] <b class=HIM>Plugins (phase 2)</b>
+------------------------------------
+
+================================================================================
+
+  -[ <b class=HIW>Lynis 3.0.6 Results</b> ]-
+
+  <b class=HIG>Great, no warnings</b>
+
+  <b class=HIY>Suggestions</b> (11):
+  <b class=HIW>----------------------------</b>
+  <b class=HIY>*</b> Check PAM configuration, add rounds if applicable and expire passwords to encrypt with new values [AUTH-9229] 
+      <b class=WHI>https://cisofy.com/lynis/controls/AUTH-9229/</b>
+
+  <b class=HIY>*</b> When possible set expire dates for all password protected accounts [AUTH-9282] 
+      <b class=WHI>https://cisofy.com/lynis/controls/AUTH-9282/</b>
+
+  <b class=HIY>*</b> To decrease the impact of a full /home file system, place /home on a separate partition [FILE-6310] 
+      <b class=WHI>https://cisofy.com/lynis/controls/FILE-6310/</b>
+
+  <b class=HIY>*</b> To decrease the impact of a full /tmp file system, place /tmp on a separate partition [FILE-6310] 
+      <b class=WHI>https://cisofy.com/lynis/controls/FILE-6310/</b>
+
+  <b class=HIY>*</b> To decrease the impact of a full /var file system, place /var on a separate partition [FILE-6310] 
+      <b class=WHI>https://cisofy.com/lynis/controls/FILE-6310/</b>
+
+  <b class=HIY>*</b> Check DNS configuration for the dns domain name [NAME-4028] 
+      <b class=WHI>https://cisofy.com/lynis/controls/NAME-4028/</b>
+
+  <b class=HIY>*</b> Add the IP name and FQDN to /etc/hosts for proper name resolving [NAME-4404] 
+      <b class=WHI>https://cisofy.com/lynis/controls/NAME-4404/</b>
+
+  <b class=HIY>*</b> Check iptables rules to see which rules are currently not used [FIRE-4513] 
+      <b class=WHI>https://cisofy.com/lynis/controls/FIRE-4513/</b>
+
+  <b class=HIY>*</b> Enable logging to an external logging host for archiving purposes and additional protection [LOGG-2154] 
+      <b class=WHI>https://cisofy.com/lynis/controls/LOGG-2154/</b>
+
+  <b class=HIY>*</b> Determine if automation tools are present for system management [TOOL-5002] 
+      <b class=WHI>https://cisofy.com/lynis/controls/TOOL-5002/</b>
+
+  <b class=HIY>*</b> One or more sysctl values differ from the scan profile and could be tweaked [KRNL-6000] 
+    - Solution : Change sysctl value or disable test (skip-test=KRNL-6000:&lt;sysctl-key&gt;)
+      <b class=WHI>https://cisofy.com/lynis/controls/KRNL-6000/</b>
+
+  <b class=CYN>Follow-up</b>:
+  <b class=HIW>----------------------------</b>
+  <b class=HIW>-</b> Show details of a test (lynis show details TEST-ID)
+  <b class=HIW>-</b> Check the logfile for all details (less /var/log/lynis.log)
+  <b class=HIW>-</b> Read security controls texts (https://cisofy.com)
+  <b class=HIW>-</b> Use --upload to upload data to central system (Lynis Enterprise users)
+
+================================================================================
+
+  <b class=HIW>Lynis security scan details</b>:
+
+  <b class=CYN>Hardening index</b> : <b class=HIW>94</b> [<b class=HIG>##################</b>  ]
+  <b class=CYN>Tests performed</b> : <b class=HIW>258</b>
+  <b class=CYN>Plugins enabled</b> : <b class=HIW>0</b>
+
+  <b class=HIW>Components</b>:
+  - Firewall               [<b class=HIG>V</b>]
+  - Malware scanner        [<b class=HIG>V</b>]
+
+  <b class=HIY>Scan mode</b>:
+  Normal [V]  Forensics [ ]  Integration [ ]  Pentest [ ]
+
+  <b class=HIY>Lynis modules</b>:
+  - Compliance status      [<b class=HIY>?</b>]
+  - Security audit         [<b class=HIG>V</b>]
+  - Vulnerability scan     [<b class=HIG>V</b>]
+
+  <b class=HIY>Files</b>:
+  - Test and debug information      : <b class=HIW>/var/log/lynis.log</b>
+  - Report data                     : <b class=HIW>/var/log/lynis-report.dat</b>
+
+================================================================================
+
+  <b class=HIW>Lynis</b> 3.0.6
+
+  Auditing, system hardening, and compliance for UNIX-based systems
+  (Linux, macOS, BSD, and others)
+
+  2007-2021, CISOfy - https://cisofy.com/lynis/
+  <b class=HIW>Enterprise support available (compliance, plugins, interface and tools)</b>
+
+================================================================================
+
+  <b class="BBLU">[TIP]</b>: <b style="color:#5555ff;">Enhance Lynis audits by adding your settings to custom.prf (see /etc/lynis/default.prf for all settings)</b>
+
+</pre>
+</body>
+</html>
