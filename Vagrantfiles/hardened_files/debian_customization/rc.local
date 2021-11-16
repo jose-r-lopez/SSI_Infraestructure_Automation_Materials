@@ -1,0 +1,5 @@
+#!/bin/sh
+
+sudo mount -o remount,noexec /dev/shm
+sudo mount -o remount,noexec /dev/
+sudo mount -o remount,nodev /run
